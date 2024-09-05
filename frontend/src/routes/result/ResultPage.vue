@@ -44,7 +44,6 @@ import ResultShareModal from './ResultShareModal.vue';
 import { getDistrictCode } from '@/common/utils';
 import BodyText from '../../components/design-system/typography/BodyText.vue';
 import ErrorModal from '../../components/ErrorModal.vue';
-import DonateBlock from '../../components/DonateBlock.vue';
 import CheckboxComponent from '../../components/design-system/input/CheckboxComponent.vue';
 import { inject } from 'vue';
 import { EmbedKey } from '@/components/utilities/embedding/EmbedKey';
@@ -187,6 +186,28 @@ const resultsGeneral = computed(() => {
   );
   return ra;
 });
+
+// Define a type for resultMap with string keys and number values
+type ResultMap = {
+    [key: string]: number | undefined; // Use undefined to handle cases where a cId might not exist.
+};
+
+// Create a map to hold cId and corresponding result_percent
+const resultMap: ResultMap = resultsGeneral.value.reduce<ResultMap>((map, e) => {
+    if (e.result) {
+        map[e.cId] = e.result.result_percent;
+    }
+    return map;
+}, {});
+
+// Retrieve the result_percent for the specified cIds
+const ra_kozos = resultMap['d578d28c-dbac-4bae-9cc4-963b506e0101'];
+const ra_15min = resultMap['7a6f9a15-2e71-4bca-a45d-94680f9b4755'];
+const ra_fent = resultMap['94b53e83-7875-4c16-9ccf-4becae64f089'];
+const ra_tech = resultMap['1a93946b-27ba-4fd2-a05b-6474b276815c'];
+const ra_auto = resultMap['df6eee27-f75d-430b-bc22-dc3cafa2bc90'];
+const ra_gazd = resultMap['1ad707e9-a9c8-4e92-a244-00e156ad25a2'];
+
 const shareModal = ref<InstanceType<typeof ResultShareModal> | null>(null);
 
 // Temporary subscribe
@@ -195,35 +216,6 @@ const emailError = ref();
 const posting = ref();
 const success = ref();
 const message = ref();
-
-const handleSubscribe = async () => {
-  if (email.value === '') {
-    emailError.value = t('routes.index.IndexPage.empty-email-error');
-    return;
-  } else {
-    emailError.value = undefined;
-  }
-
-  posting.value = true;
-
-  const response = await fetch('/api/subscriptions', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({ email: email.value }),
-  });
-
-  if (response.ok) {
-    posting.value = false;
-    success.value = true;
-    message.value = t('routes.index.IndexPage.success');
-  } else {
-    posting.value = false;
-    success.value = false;
-    message.value = t('routes.index.IndexPage.error');
-  }
-};
 
 onMounted(() => {
   if (districtCode.includes('english')) {
@@ -368,8 +360,16 @@ onUnmounted(() => {
           <ResultCategory
             :result="resultsGeneral"
             category="general"
-            :max-visible-candidates="5"
+            :max-visible-candidates="6"
           />
+          <iframe 
+            :src="`https://docs.google.com/forms/d/e/1FAIpQLSeMvM2hQqN7kH8UmS0bSXQcu-7bSNHn9i3GDKWfmpYBPsPoHA/viewform?usp=pp_url&entry.584894938=${ra_kozos}&entry.1510674861=${ra_15min}&entry.276333858=${ra_fent}&entry.2052211534=${ra_tech}&entry.2053574064=${ra_auto}&entry.632598064=${ra_gazd}`" 
+            width="640" 
+            height="743" 
+            frameborder="0" 
+            marginheight="0" 
+            marginwidth="0"
+          ></iframe>
         </StackComponent>
         <StackComponent v-else class="main" spacing="medium">
           <CardComponent corner="bottom-left">
@@ -428,7 +428,6 @@ onUnmounted(() => {
               </StackComponent>
             </StackComponent>
           </CardComponent>
-          <DonateBlock />
         </StackComponent>
         <template #bottom-bar>
           <ResponsiveWrapper
