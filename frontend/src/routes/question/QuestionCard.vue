@@ -37,10 +37,6 @@ defineProps<Props>();
         <BodyText size="small">
           {{ currentQuestion }}/{{ questionCount }}
         </BodyText>
-        <BodyText size="small">{{ question.name }}</BodyText>
-        <TagComponent v-for="tag in question.tags" :key="tag">
-          {{ tag }}
-        </TagComponent>
       </StackComponent>
       <HeadingComponent class="heading--desktop" kind="title" size="large">
         {{ question.title }}
@@ -51,11 +47,7 @@ defineProps<Props>();
       <BodyText v-if="question.gist" size="medium">{{
         question.gist
       }}</BodyText>
-      <AccordionComponent v-if="question.detail" class="detail">
-        <template #content>
-          <BodyText size="medium">{{ question.detail }}</BodyText>
-        </template>
-      </AccordionComponent>
+      <BodyText size="small">{{ question.detail }}</BodyText>
     </StackComponent>
   </CardComponent>
 </template>

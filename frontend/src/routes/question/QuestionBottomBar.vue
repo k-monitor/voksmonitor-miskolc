@@ -15,6 +15,7 @@ import ResponsiveWrapper from '@/components/utilities/ResponsiveWrapper.vue';
 import {
   vkiLogoInFavour,
   vkiLogoAgainst,
+  vkiLogoNeutral,
   vkiStarOutlined,
   vkiStarFilled,
 } from '@/components/design-system/icons';
@@ -42,7 +43,7 @@ const starIcon = computed(() =>
 <template>
   <BottomBar class="bottom-bar">
     <div class="grid">
-      <ResponsiveWrapper large extra-large huge>
+      <!-- <ResponsiveWrapper large extra-large huge>
         <StackComponent
           horizontal
           centered
@@ -61,7 +62,7 @@ const starIcon = computed(() =>
             $t('routes.question.QuestionBottomBar.important-for-me')
           }}</BodyText>
         </StackComponent>
-      </ResponsiveWrapper>
+      </ResponsiveWrapper> -->
       <ResponsiveWrapper extra-small small medium>
         <IconButton class="important">
           <IconComponent
@@ -98,6 +99,20 @@ const starIcon = computed(() =>
           </template>
           {{ $t('routes.question.QuestionBottomBar.no') }}
         </ButtonComponent>
+        <ButtonComponent
+          class="skip"
+          kind="answer"
+          @click="skipClick"
+          color="white"
+          :selected="answer.answer === UserAnswerEnum.skip"
+        >
+          <template #icon>
+            <IconComponent
+              :icon="vkiLogoNeutral"
+            />
+          </template>
+          {{ $t('routes.question.QuestionBottomBar.without-answer') }}
+        </ButtonComponent>
       </ResponsiveWrapper>
       <ResponsiveWrapper extra-small>
         <ButtonComponent
@@ -120,6 +135,29 @@ const starIcon = computed(() =>
         >
           <template #icon>
             <IconComponent :icon="vkiLogoAgainst" />
+          </template>
+        </ButtonComponent>
+        <ButtonComponent
+          class="against"
+          kind="answer"
+          color="secondary"
+          :selected="answer.answer === UserAnswerEnum.no"
+          @click="noClick"
+        >
+          <template #icon>
+            <IconComponent :icon="vkiLogoAgainst" />
+          </template>
+        </ButtonComponent>
+        <ButtonComponent
+          class="skip"
+          kind="answer"
+          @click="skipClick"
+          :selected="answer.answer === UserAnswerEnum.skip"
+        >
+          <template #icon>
+            <IconComponent
+              :icon="vkiLogoNeutral"
+            />
           </template>
         </ButtonComponent>
       </ResponsiveWrapper>
