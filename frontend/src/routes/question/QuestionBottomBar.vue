@@ -177,7 +177,7 @@ const starIcon = computed(() =>
   display: grid;
   width: clamp(32rem, 50vw, 48rem);
   grid-template-columns: auto 1fr 1fr;
-  grid-template-areas: 'important in-favour against';
+  grid-template-areas: 'important in-favour against skip';
   align-items: center;
   justify-content: center;
   gap: var(--responsive-gap-medium);
@@ -204,6 +204,11 @@ const starIcon = computed(() =>
 
 .against {
   grid-area: against;
+  justify-self: stretch;
+}
+
+.skip {
+  grid-area: skip;
   justify-self: stretch;
 }
 

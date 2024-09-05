@@ -165,6 +165,8 @@ const handleAnswerClick = (answer: UserAnswerEnum) => {
     electionStore.setAnswer(currentQuestionNr.value, answer);
     handleNextClick();
   }
+  if (answer == UserAnswerEnum.skip)
+    handleNextClick();
 };
 
 onMounted(() => {
@@ -184,6 +186,7 @@ onUnmounted(() => {
       <NavigationBar transparent>
         <template #title>{{ breadcrumbs }}</template>
         <template #right>
+
           <EmbedWrapper>
             <ResponsiveWrapper medium large extra-large huge>
               <ButtonComponent
