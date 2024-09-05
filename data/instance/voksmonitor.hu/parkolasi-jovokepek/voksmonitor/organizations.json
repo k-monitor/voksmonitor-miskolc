@@ -1,50 +1,50 @@
 [
   {
     "id": "516ffd6f-0632-4061-86c5-fb9252f15bc1",
-    "name": "DK-MSZP-PÁRBESZÉD",
-    "shortName": "DK-MSZP-P",
-    "sortName": "DK-MSZP-P",
+    "name": "Közösségi közlekedésen alapuló város",
+    "shortName": "Közösségi közlekedésen alapuló város",
+    "sortName": "Közösségi közlekedésen alapuló város",
     "type": "candidate-list",
     "party": "Európai Szocialisták Pártja",
     "group": "Szocialisták és Demokraták Progresszív Szövetsége"
   },
   {
     "id": "98f48248-1821-4e8c-8da9-96ee532af410",
-    "name": "Fidesz-KDNP",
-    "shortName": "Fidesz-KDNP",
-    "sortName": "Fidesz-KDNP",
+    "name": "15 perces város",
+    "shortName": "15 perces város",
+    "sortName": "15 perces város",
     "type": "candidate-list",
     "group": "Független képviselők"
   },
   {
     "id": "56e20377-7132-44be-8cd0-91b1c3982a09",
-    "name": "Jobbik-Konzervatívok",
-    "shortName": "Jobbik ",
-    "sortName": "Jobbik ",
+    "name": "Fenntartható város",
+    "shortName": "Fenntartható város",
+    "sortName": "Fenntartható város",
     "type": "candidate-list",
     "group": "Független képviselők"
   },
   {
     "id": "855bace4-f913-4d99-be70-fb391b17dd85",
-    "name": "LMP-Magyarország Zöld Pártja",
-    "shortName": "LMP",
-    "sortName": "LMP",
+    "name": "Technokrata város",
+    "shortName": "Technokrata város",
+    "sortName": "Technokrata város",
     "type": "candidate-list"
   },
   {
     "id": "b0df4b9d-9272-426b-8cf7-b4e7ed6e1220",
-    "name": "Magyar Kétfarkú Kutyapárt",
-    "shortName": "MKKP",
-    "sortName": "MKKP",
+    "name": "Autóközpontú",
+    "shortName": "Autóközpontú",
+    "sortName": "Autóközpontú",
     "type": "candidate-list",
     "party": "Európai Kalózpárt",
     "group": "Zöldek/Európai Szabad Szövetség"
   },
   {
     "id": "153aec09-6689-4db9-b63a-c6b28c7ce5c0",
-    "name": "Második Reformkor",
-    "shortName": "2RK",
-    "sortName": "2RK",
+    "name": "Régiós gazdasági központ",
+    "shortName": "Régiós gazdasági központ",
+    "sortName": "Régiós gazdasági központ",
     "type": "candidate-list"
   },
   {

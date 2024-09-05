@@ -1,12 +1,12 @@
 {
   "id": "0e5321db-556b-4e5d-9a86-9f38edbbf67d",
-  "key": "europai-2024",
+  "key": "parkolasi-jovokepek",
   "createdAt": "2021-01-01T00:00:00+01:00",
-  "title": "Európai parlamenti választások 2024",
-  "shortTitle": "Európai választások 2024",
+  "title": "Parkolási jövőképek",
+  "shortTitle": "Parkolási jövőképek",
   "calculatorGroup": {
     "id": "c4f3095d-0f8e-4692-a5c2-de5dda6b2176",
-    "key": "europai-2024"
+    "key": "parkolasi-jovokepek"
   },
   "votingHours": [
     {

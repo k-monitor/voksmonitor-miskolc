@@ -87,13 +87,13 @@ const handleSubscribe = async () => {
       <StackComponent spacing="small" centered class="calc-main">
         <StackComponent spacing="large" centered space-between>
           <BodyText size="medium" tag="h1" color="fg-strong">
-            <strong>Európai parlamenti & önkormányzati választás Magyarországon</strong
+            <strong>Parkolási jövőképek</strong
             ><br />
             2024 június 9.
             <br />
           </BodyText>
           <HeadlineText tag="p" size="small">
-            Európai parlamenti & Fővárosi polgármester választás
+            Parkolási jövőképek
             <span style="color: rgb(var(--color-neutral-fg))"> 2024 </span>
           </HeadlineText>
           <ResponsiveWrapper extra-small small>
@@ -109,7 +109,7 @@ const handleSubscribe = async () => {
                 <StackComponent spacing="large" centered>
                   <StackComponent spacing="small" centered space-between>
                     <BodyText size="medium" tag="h2" color="fg-strong">
-                      <strong>Európai parlamenti voksmonitor</strong>
+                      <strong>Parkolási jövőképek</strong>
                     </BodyText>
                     <BodyText size="small">
                       40 kérdés, nagyjából 10 perc
@@ -123,7 +123,7 @@ const handleSubscribe = async () => {
                           params: {
                             ...route.params,
                             type: `${'valasztasok'}`,
-                            first: 'europai-2024',
+                            first: 'parkolasi-jovokepek',
                             second: 'voksmonitor',
                           },
                           query: { ...route.query },
@@ -144,7 +144,7 @@ const handleSubscribe = async () => {
                           params: {
                             ...route.params,
                             type: `${'valasztasok'}`,
-                            first: 'europai-2024',
+                            first: 'parkolasi-jovokepek',
                             second: 'english',
                           },
                           query: { ...route.query },
@@ -278,7 +278,7 @@ const handleSubscribe = async () => {
                 <StackComponent spacing="large" centered>
                   <StackComponent spacing="small" centered space-between>
                     <BodyText size="medium" tag="h2" color="fg-strong">
-                      <strong>Európai parlamenti voksmonitor</strong>
+                      <strong>Parkolási jövőképek</strong>
                     </BodyText>
                     <BodyText size="small">
                       40 kérdés, nagyjából 10 perc
@@ -292,7 +292,7 @@ const handleSubscribe = async () => {
                           params: {
                             ...route.params,
                             type: `${'valasztasok'}`,
-                            first: 'europai-2024',
+                            first: 'parkolasi-jovokepek',
                             second: 'voksmonitor',
                           },
                           query: { ...route.query },
@@ -313,7 +313,7 @@ const handleSubscribe = async () => {
                           params: {
                             ...route.params,
                             type: `${'valasztasok'}`,
-                            first: 'europai-2024',
+                            first: 'parkolasi-jovokepek',
                             second: 'english',
                           },
                           query: { ...route.query },
@@ -328,109 +328,6 @@ const handleSubscribe = async () => {
                   </StackComponent>
                 </StackComponent>
               </CardComponent>
-              <StackComponent spacing="large">
-                <CardComponent
-                  corner="bottom-left"
-                  padding="large"
-                  border
-                  border-radius="large"
-                  shadow
-                  class="other-calc-card calc-youth"
-                >
-                  <StackComponent spacing="large" centered>
-                    <StackComponent spacing="small" centered space-between>
-                      <BodyText size="medium" tag="h2" color="fg-strong">
-                        <strong>Budapest főpolgármesteri voksmonitor</strong>
-                      </BodyText>
-                      <BodyText size="small">
-                        38 kérdés, nagyjából 8-10 perc
-                      </BodyText>
-                      <ButtonComponent
-                        kind="filled"
-                        color="primary"
-                        @click="
-                          router.push({
-                            name: appRoutes.guide.name,
-                            params: {
-                              ...route.params,
-                              type: `${'valasztasok'}`,
-                              first: 'onkormanyzati-2024',
-                              second: 'budapest',
-                            },
-                            query: { ...route.query },
-                          })
-                        "
-                      >
-                      A Voksmonitor elindítása
-                        <template #iconAfter>
-                          <IconComponent :icon="mdiArrowRight" />
-                        </template>
-                      </ButtonComponent>
-                      <ButtonComponent
-                        kind="outlined"
-                        color="primary"
-                        @click="
-                          router.push({
-                            name: appRoutes.guide.name,
-                            params: {
-                              ...route.params,
-                              type: `${'valasztasok'}`,
-                              first: 'onkormanyzati-2024',
-                              second: 'budapest-english',
-                            },
-                            query: { ...route.query },
-                          })
-                        "
-                      >
-                      English version
-                        <template #iconAfter>
-                          <IconComponent :icon="mdiArrowRight" />
-                        </template>
-                      </ButtonComponent>
-                    </StackComponent>
-                  </StackComponent>
-                </CardComponent>
-                <CardComponent
-                  corner="bottom-left"
-                  padding="large"
-                  border
-                  border-radius="large"
-                  shadow
-                  class="other-calc-card calc-youth"
-                >
-                  <StackComponent spacing="large" centered>
-                    <StackComponent spacing="small" centered space-between>
-                      <BodyText size="medium" tag="h2" color="fg-strong">
-                        <strong>Debrecen polgármesteri voksmonitor</strong>
-                      </BodyText>
-                      <BodyText size="small">
-                        23 kérdés, nagyjából 5 perc
-                      </BodyText>
-                      <ButtonComponent
-                        kind="filled"
-                        color="primary"
-                        @click="
-                          router.push({
-                            name: appRoutes.guide.name,
-                            params: {
-                              ...route.params,
-                              type: `${'valasztasok'}`,
-                              first: 'onkormanyzati-2024',
-                              second: 'debrecen',
-                            },
-                            query: { ...route.query },
-                          })
-                        "
-                      >
-                      A Voksmonitor elindítása
-                        <template #iconAfter>
-                          <IconComponent :icon="mdiArrowRight" />
-                        </template>
-                      </ButtonComponent>
-                    </StackComponent>
-                  </StackComponent>
-                </CardComponent>
-              </StackComponent>
             </StackComponent>
           </ResponsiveWrapper>
         </StackComponent>

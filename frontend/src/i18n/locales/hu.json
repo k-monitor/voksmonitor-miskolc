@@ -169,6 +169,7 @@
       "QuestionBottomBar": {
         "important-for-me": "Fontos számomra",
         "no": "Nem értek egyet",
+        "without-answer": "NEM TUDOM / NEM ÉRDEKEL",
         "yes": "Egyetértek"
       },
       "QuestionPage": {
