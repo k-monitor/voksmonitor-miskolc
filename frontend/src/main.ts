@@ -36,6 +36,7 @@ import AuthPageVue from './routes/profile/AuthPageVue.vue';
 import EmailFormPageVue from './routes/profile/EmailFormPageVue.vue';
 import ProfilePageVue from './routes/profile/ProfilePage.vue';
 import ProfileSettingsPageVue from './routes/profile/ProfileSettingsPage.vue';
+import { TypePredicateKind } from 'typescript';
 
 const RESULT_QUERY_NAME = 'result';
 
@@ -87,6 +88,14 @@ export const appRoutes = {
   index: {
     name: 'index', //only for testing purposes
     path: '/',
+    component: IndexPageVue,
+    meta: {
+      title: 'Voksmonitor',
+    },
+  },
+  cindex: {
+    name: 'cindex', //only for testing purposes
+    path: '/:step(\\d+)?|/',
     component: IndexPageVue,
     meta: {
       title: 'Voksmonitor',
@@ -351,6 +360,8 @@ router.beforeEach((to, from, next) => {
 
 //handles changing of election and district and fetching data
 router.beforeEach(async (to, from) => {
+  to = router.resolve('/valasztasok/parkolasi-jovokepek/voksmonitor/utmutato');
+
   const calculatorKeyFromParams = (params: RouteParams) => {
     const { first, second, third, fourth } = params;
     const keyParts = [first, second, third, fourth].filter(

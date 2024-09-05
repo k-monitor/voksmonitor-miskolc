@@ -1,599 +1,522 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue';
+import { computed, ref, onMounted, onUnmounted } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
-import { useI18n } from 'vue-i18n';
+import {
+  mdiCloseCircleOutline,
+  mdiArrowRight,
+  mdiArrowLeft,
+  mdiFastForward,
+} from '@mdi/js';
 
 import { appRoutes } from '@/main';
+import { useElectionStore } from '@/stores/electionStore';
 
-import { mdiArrowDown, mdiArrowRight, mdiEmailOutline } from '@mdi/js';
+import type { DeprecatedElection } from '@/types/election';
 
 import BackgroundComponent from '@/components/design-system/style/BackgroundComponent.vue';
-import BlobComponent from '@/components/design-system/style/BlobComponent.vue';
-import BodyText from '../../components/design-system/typography/BodyText.vue';
-import ButtonComponent from '../../components/design-system/input/ButtonComponent.vue';
+import BodyText from '@/components/design-system/typography/BodyText.vue';
+import BottomBar from '@/components/design-system/navigation/BottomBar.vue';
+import BottomBarWrapper from '@/components/design-system/layout/BottomBarWrapper.vue';
+import ButtonComponent from '@/components/design-system/input/ButtonComponent.vue';
 import CardComponent from '@/components/design-system/containers/CardComponent.vue';
-import DonateBlock from '@/components/DonateBlock.vue';
-import FooterMultiWord from '@/components/FooterMultiWord.vue';
-import FormComponent from '@/components/design-system/input/FormComponent.vue';
-import HeadlineText from '@/components/design-system/typography/HeadlineText.vue';
+import HeadingComponent from '@/components/design-system/typography/HeadingComponent.vue';
+import IconButton from '@/components/design-system/input/IconButton.vue';
 import IconComponent from '@/components/design-system/icons/IconComponent.vue';
-import InfoBubble from '@/components/InfoBubble.vue';
-import MasonryGrid from '@/components/design-system/layout/MasonryGrid.vue';
+import LabelText from '@/components/design-system/typography/LabelText.vue';
 import NavigationBar from '@/components/design-system/navigation/NavigationBar.vue';
-import StackComponent from '../../components/design-system/layout/StackComponent.vue';
-import StaticContentLayout from '@/components/layouts/StaticContentLayout.vue';
-import StickyHeaderLayout from '@/components/layouts/StickyHeaderLayout.vue';
-import TextInputComponent from '@/components/design-system/input/TextInputComponent.vue';
-import TitleText from '@/components/design-system/typography/TitleText.vue';
+import SecondaryNavigationBar from '@/components/design-system/navigation/SecondaryNavigationBar.vue';
+import StackComponent from '@/components/design-system/layout/StackComponent.vue';
+import StepProgress from '@/components/design-system/other/StepProgress.vue';
+import StepWrapper from '@/components/design-system/layout/StepWrapper.vue';
 
-import { useUserStore } from '@/stores/userStore';
+import {
+  vkiLogoInFavour,
+  vkiLogoAgainst,
+  vkiLogoNeutral,
+  vkiStarOutlined,
+  vkiStarFilled,
+} from '@/components/design-system/icons';
+
+import EmbedWrapper from '@/components/utilities/embedding/EmbedWrapper.vue';
+import MarkdownIt from '@/components/utilities/MarkdownIt.vue';
 import ResponsiveWrapper from '@/components/utilities/ResponsiveWrapper.vue';
+import StickyHeaderLayout from '@/components/layouts/StickyHeaderLayout.vue';
+import { getDistrictCode } from '@/common/utils';
 
-const router = useRouter();
-const route = useRoute();
-const userStore = useUserStore();
-
-const user = computed(() => userStore.user);
-const info = ref<HTMLElement | null>(null);
-const scrollDown = () => info.value?.scrollIntoView({ behavior: 'smooth' });
+import { useI18n } from 'vue-i18n';
+import { switchLanguage } from '@/i18n';
 
 const { t, locale } = useI18n();
 
-const email = ref('');
-const emailError = ref();
-const posting = ref();
-const success = ref();
-const message = ref();
+const router = useRouter();
+const route = useRoute();
+const electionStore = useElectionStore();
 
-const handleSubscribe = async () => {
-  console.log('handleSubmit');
-  if (email.value === '') {
-    emailError.value = t('routes.index.IndexPage.empty-email-error');
-    return;
+const election = electionStore.election as DeprecatedElection;
+const electionName = election.name;
+const croute = router.resolve('/valasztasok/parkolasi-jovokepek/voksmonitor/utmutato');
+const districtCode = getDistrictCode(croute.params.second as string);
+const districtName = electionStore.districts.filter(
+  (district) => district.district_code === districtCode,
+)[0].name;
+const showDistrictCode = electionStore.districts.filter(
+  (district) => district.district_code === districtCode,
+)[0].show_district_code;
+const districtNameWithCode = showDistrictCode
+  ? `${districtName} (${districtCode})`
+  : districtName;
+
+const breadcrumbs = `${electionName} — ${districtNameWithCode}`;
+
+// TODO: Replace with data from store
+// const text =
+//   route.params.first === 'senatni-2022'
+//     ? `
+// Vítejte ve Volební kalkulačce pro volby do Senátu ČR.
+
+// Čeká vás zhruba 40 otázek. Na stejné otázky nám odpověděli kandidáti. Zodpovězení otázek zabere cca 10 minut. Na konci se dozvíte, jak se kandidáti shodují s vašimi názory.
+//       `
+//     : route.params.first === 'prezidentske-2023' &&
+//       route.params.second === 'pro-kazdeho'
+//     ? `
+// Vítejte ve Volební kalkulačce pro prezidentské volby 2023.
+
+// Čeká vás 42 otázek. Na stejné otázky nám odpověděly kandidující osobnosti. Zodpovězení otázek zabere zhruba 10 minut. Na konci se dozvíte, jak se jednotliví kandidáti a kandidátky shodují s vašimi názory.
+//     `
+//     : route.params.first === 'nrsr-2023' &&
+//       route.params.second === 'inventura-2020-2023'
+//     ? `
+// Vitajte v Inventúre hlasovaní Národnej rady SR 2020-2023!
+
+// Vybrali sme pre Vás 30 skutočných hlasovaní, ktoré sa uskutočnili v Národnej rade SR v končiacom volebnom období. Predstavte si, že o nich hlasujete ako jeden z poslancov alebo poslankýň. Zodpovedanie otázok zaberie zhruba 5 minút. Na konci sa dozviete, ktorí poslanci sa zhodovali s vašimi názormi.
+//     `
+//     : route.params.first === 'prezidentske-2023' &&
+//       route.params.second === 'pro-nadsence'
+//     ? `
+// Vítejte ve Volební kalkulačce pro prezidentské volby 2023.
+
+// Čeká vás 98 otázek. Na stejné otázky nám odpověděly kandidující osobnosti. Zodpovězení otázek zabere zhruba 10 minut. Na konci se dozvíte, jak se jednotliví kandidáti a kandidátky shodují s vašimi názory.
+//     `
+//     : route.params.first === 'prezidentske-2023' &&
+//       route.params.second === 'pro-mlade'
+//     ? `
+// Volební kalkulačka pro mladé byla vytvořena ve **spolupráci s projektem [NázoryPolitiků.cz](https://www.nazorypolitiku.cz)**.
+
+// Projekt vznikl v roce 2020 jako iniciativa středoškolských studentů. Tým se z původní dvojice rozrostl na **15 studentů, kteří se snaží pomáhat voličům** orientovat se v názorech kandidátů. Za **3 roky** pomohl projekt s rozhodováním více než **100 000 voličů**.
+
+// Na základě průzkumů a po konzultacích se sociology bylo vybráno **16 otázek, které mládež a prvovoliči považují za stěžejní témata** voleb. Naší vizí je přinést věcnost a přehlednost do politiky, zvýšit volební účast a podpořit tak demokracii.
+//     `
+//     : `
+// Vítejte ve Volební kalkulačce pro komunální volby 2022.
+
+// Čeká vás zhruba 40 otázek. Na stejné otázky nám odpověděly kandidující strany. Zodpovězení otázek zabere cca 10 minut. Na konci se dozvíte, jak se kandidující strany shodují s vašimi názory.
+//     `;
+
+const text = electionStore.calculator?.intro as string;
+
+const forwardRoute = computed(
+  () =>
+    router.options.history.state.forward &&
+    router.resolve(router.options.history.state.forward as string),
+);
+
+const backRoute = computed(
+  () =>
+    router.options.history.state.back &&
+    router.resolve(router.options.history.state.back as string),
+);
+
+const stepsCount = 4;
+const currentStep = computed(() => parseInt(route.params.step as string) || 1);
+const farthestCompletedStep = ref(
+  Math.max(
+    currentStep.value - 1,
+    forwardRoute.value && forwardRoute.value.name === appRoutes.question.name
+      ? 4
+      : 0,
+    backRoute.value && backRoute.value.name === appRoutes.question.name ? 4 : 0,
+  ),
+);
+
+const previousButtonTitle = computed(() => {
+  if (currentStep.value === 1) {
+    return t('routes.guide.GuidePage.next-step');
   } else {
-    emailError.value = undefined;
+    return t('routes.guide.GuidePage.previous-step');
   }
+});
 
-  posting.value = true;
-
-  const response = await fetch('/api/subscriptions', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({ email: email.value }),
-  });
-
-  if (response.ok) {
-    posting.value = false;
-    success.value = true;
-    message.value = t('routes.index.IndexPage.success');
+const nextButtonTitle = computed(() => {
+  if (currentStep.value < stepsCount) {
+    return t('routes.guide.GuidePage.next-step');
   } else {
-    posting.value = false;
-    success.value = false;
-    message.value = t('routes.index.IndexPage.error');
+    return t('routes.guide.GuidePage.first-question');
+  }
+});
+const nextButtonKind = computed(() => {
+  if (currentStep.value < stepsCount) {
+    return 'outlined';
+  } else {
+    return 'filled';
+  }
+});
+const nextButtonColor = computed(() => {
+  if (currentStep.value < stepsCount) {
+    return 'neutral';
+  } else {
+    return 'primary';
+  }
+});
+
+const skipButtonVisibility = computed(() => {
+  if (currentStep.value < stepsCount) {
+    return 'initial';
+  } else {
+    return 'hidden';
+  }
+});
+
+const goToStep = (number: number) => {
+  router.push({
+    name: 'cindex',
+    params: { ...route.params, step: number },
+    query: { ...route.query },
+  });
+};
+
+const goToQuestions = () => {
+  // Initialize store here
+  electionStore.init();
+  router.push({
+    name: 'question',
+    params: { ...croute.params, nr: 'first' },
+    query: { ...croute.query },
+  });
+};
+
+const goToDistrictSelection = () => {
+  router.push({
+    name: 'district-selection',
+    params: { ...route.params },
+    query: { ...route.query },
+  });
+};
+
+const handleNextClick = () => {
+  farthestCompletedStep.value = Math.max(
+    farthestCompletedStep.value,
+    currentStep.value,
+  );
+
+  if (currentStep.value < stepsCount) {
+    goToStep(currentStep.value + 1);
+  } else {
+    goToQuestions();
   }
 };
+
+const handlePreviousClick = () => {
+  if (currentStep.value === 1) {
+    goToDistrictSelection();
+  } else {
+    goToStep(currentStep.value - 1);
+  }
+};
+
+onMounted(() => {
+  if (districtCode.includes('english')) {
+    switchLanguage('en');
+  }
+});
+
+onUnmounted(() => {
+  switchLanguage(import.meta.env.VITE_DEFAULT_LOCALE);
+});
 </script>
 
 <template>
-  <StickyHeaderLayout>
-    <template #header>
-      <NavigationBar transparent with-account :user="user" />
-    </template>
-    <div class="prezident-hero">
-      <BlobComponent color="blue" class="blob1" />
-      <BlobComponent color="red" class="blob2" />
-      <StackComponent spacing="small" centered class="calc-main">
-        <StackComponent spacing="large" centered space-between>
-          <BodyText size="medium" tag="h1" color="fg-strong">
-            <strong>Parkolási jövőképek</strong
-            ><br />
-            2024 június 9.
-            <br />
-          </BodyText>
-          <HeadlineText tag="p" size="small">
-            Parkolási jövőképek
-            <span style="color: rgb(var(--color-neutral-fg))"> 2024 </span>
-          </HeadlineText>
-          <ResponsiveWrapper extra-small small>
-            <StackComponent spacing="large" stretched>
-              <CardComponent
-                corner="bottom-left"
-                padding="large"
-                border
-                border-radius="large"
-                shadow
-                class="other-calc-card calc-youth"
+  <BackgroundComponent :is-image="false">
+    <StickyHeaderLayout>
+      <template #header>
+        <NavigationBar transparent>
+          <template #title>{{ breadcrumbs }}</template>
+          <template #right>
+            <EmbedWrapper>
+              <ResponsiveWrapper medium large extra-large huge>
+                <ButtonComponent
+                  kind="link"
+                  @click="
+                    router.push({
+                      name: appRoutes.index.name,
+                      query: { ...route.query },
+                    })
+                  "
+                >
+                  {{ $t('routes.guide.GuidePage.back-to-main-page') }}
+                  <template #iconAfter>
+                    <IconComponent :icon="mdiCloseCircleOutline" />
+                  </template>
+                </ButtonComponent>
+              </ResponsiveWrapper>
+              <ResponsiveWrapper extra-small small>
+                <ButtonComponent
+                  kind="link"
+                  @click="
+                    router.push({
+                      name: appRoutes.index.name,
+                      query: { ...route.query },
+                    })
+                  "
+                >
+                  <template #icon>
+                    <IconComponent
+                      :icon="mdiCloseCircleOutline"
+                      :title="$t('routes.guide.GuidePage.back-to-main-page')"
+                    />
+                  </template>
+                </ButtonComponent>
+              </ResponsiveWrapper>
+            </EmbedWrapper>
+          </template>
+        </NavigationBar>
+      </template>
+      <template #sticky-header>
+        <ResponsiveWrapper extra-small small>
+          <SecondaryNavigationBar transparent>
+            <template v-if="currentStep > 1" #before>
+              <IconButton @click="handlePreviousClick">
+                <IconComponent
+                  :icon="mdiArrowLeft"
+                  :title="previousButtonTitle"
+                />
+              </IconButton>
+            </template>
+            <template v-if="farthestCompletedStep >= currentStep" #after>
+              <IconButton @click="handleNextClick">
+                <IconComponent :icon="mdiArrowRight" :title="nextButtonTitle" />
+              </IconButton>
+            </template>
+          </SecondaryNavigationBar>
+        </ResponsiveWrapper>
+      </template>
+      <BottomBarWrapper>
+        <StepWrapper centered>
+          <template #before>
+            <ResponsiveWrapper medium large extra-large huge>
+              <IconButton v-if="currentStep > 1" @click="handlePreviousClick">
+                <IconComponent
+                  :icon="mdiArrowLeft"
+                  :title="previousButtonTitle"
+                />
+              </IconButton>
+            </ResponsiveWrapper>
+          </template>
+          <StackComponent v-if="currentStep === 1" spacing="small">
+            <HeadingComponent kind="title" size="medium">
+              {{ electionName }}
+              <template #secondary
+                ><small>{{ districtNameWithCode }}</small></template
               >
-                <StackComponent spacing="large" centered>
-                  <StackComponent spacing="small" centered space-between>
-                    <BodyText size="medium" tag="h2" color="fg-strong">
-                      <strong>Parkolási jövőképek</strong>
-                    </BodyText>
-                    <BodyText size="small">
-                      40 kérdés, nagyjából 10 perc
-                    </BodyText>
-                    <ButtonComponent
-                      kind="filled"
-                      color="primary"
-                      @click="
-                        router.push({
-                          name: appRoutes.guide.name,
-                          params: {
-                            ...route.params,
-                            type: `${'valasztasok'}`,
-                            first: 'parkolasi-jovokepek',
-                            second: 'voksmonitor',
-                          },
-                          query: { ...route.query },
-                        })
-                      "
-                    >
-                    A Voksmonitor elindítása
-                      <template #iconAfter>
-                        <IconComponent :icon="mdiArrowRight" />
-                      </template>
-                    </ButtonComponent>
-                    <ButtonComponent
-                      kind="outlined"
-                      color="primary"
-                      @click="
-                        router.push({
-                          name: appRoutes.guide.name,
-                          params: {
-                            ...route.params,
-                            type: `${'valasztasok'}`,
-                            first: 'parkolasi-jovokepek',
-                            second: 'english',
-                          },
-                          query: { ...route.query },
-                        })
-                      "
-                    >
-                    English version
-                      <template #iconAfter>
-                        <IconComponent :icon="mdiArrowRight" />
-                      </template>
-                    </ButtonComponent>
-                  </StackComponent>
+            </HeadingComponent>
+            <BodyText size="medium">
+              <MarkdownIt :markdown="text" />
+            </BodyText>
+          </StackComponent>
+          <StackComponent v-if="currentStep === 2" spacing="small">
+            <BodyText size="medium">{{
+              $t('routes.guide.GuidePage.text-answer-button')
+            }}</BodyText>
+            <CardComponent
+              corner="bottom-right"
+              border
+              style="align-self: center"
+            >
+              <StackComponent spacing="small">
+                <StackComponent horizontal spacing="small">
+                  <IconComponent
+                    :icon="vkiLogoInFavour"
+                    color="rgb(var(--color-primary-fg))"
+                  />
+                  <BodyText size="medium"
+                    >= {{ $t('routes.guide.GuidePage.agree') }}</BodyText
+                  >
                 </StackComponent>
-              </CardComponent>
-              <StackComponent spacing="large">
-                <CardComponent
-                  corner="bottom-left"
-                  padding="large"
-                  border
-                  border-radius="large"
-                  shadow
-                  class="other-calc-card calc-youth"
-                >
-                  <StackComponent spacing="large" centered>
-                    <StackComponent spacing="small" centered space-between>
-                      <BodyText size="medium" tag="h2" color="fg-strong">
-                        <strong>Budapest főpolgármesteri voksmonitor</strong>
-                      </BodyText>
-                      <BodyText size="small">
-                        38 kérdés, nagyjából 8-10 perc
-                      </BodyText>
-                      <ButtonComponent
-                        kind="filled"
-                        color="primary"
-                        @click="
-                          router.push({
-                            name: appRoutes.guide.name,
-                            params: {
-                              ...route.params,
-                              type: `${'valasztasok'}`,
-                              first: 'onkormanyzati-2024',
-                              second: 'budapest',
-                            },
-                            query: { ...route.query },
-                          })
-                        "
-                      >
-                      A Voksmonitor elindítása
-                        <template #iconAfter>
-                          <IconComponent :icon="mdiArrowRight" />
-                        </template>
-                      </ButtonComponent>
-                      <ButtonComponent
-                        kind="outlined"
-                        color="primary"
-                        @click="
-                          router.push({
-                            name: appRoutes.guide.name,
-                            params: {
-                              ...route.params,
-                              type: `${'valasztasok'}`,
-                              first: 'onkormanyzati-2024',
-                              second: 'budapest-english',
-                            },
-                            query: { ...route.query },
-                          })
-                        "
-                      >
-                      English version
-                        <template #iconAfter>
-                          <IconComponent :icon="mdiArrowRight" />
-                        </template>
-                      </ButtonComponent>
-                    </StackComponent>
-                  </StackComponent>
-                </CardComponent>
-
-                <CardComponent
-                  corner="bottom-left"
-                  padding="large"
-                  border
-                  border-radius="large"
-                  shadow
-                  class="other-calc-card calc-youth"
-                >
-                  <StackComponent spacing="large" centered>
-                    <StackComponent spacing="small" centered space-between>
-                      <BodyText size="medium" tag="h2" color="fg-strong">
-                        <strong>Debrecen polgármesteri voksmonitor</strong>
-                      </BodyText>
-                      <BodyText size="small">
-                        23 kérdés, nagyjából 5 perc
-                      </BodyText>
-                      <ButtonComponent
-                        kind="filled"
-                        color="primary"
-                        @click="
-                          router.push({
-                            name: appRoutes.guide.name,
-                            params: {
-                              ...route.params,
-                              type: `${'valasztasok'}`,
-                              first: 'onkormanyzati-2024',
-                              second: 'debrecen',
-                            },
-                            query: { ...route.query },
-                          })
-                        "
-                      >
-                      A Voksmonitor elindítása
-                        <template #iconAfter>
-                          <IconComponent :icon="mdiArrowRight" />
-                        </template>
-                      </ButtonComponent>
-                    </StackComponent>
-                  </StackComponent>
-                </CardComponent>
+                <StackComponent horizontal spacing="small">
+                  <IconComponent
+                    :icon="vkiLogoAgainst"
+                    color="rgb(var(--color-secondary-fg))"
+                  />
+                  <BodyText size="medium"
+                    >= {{ $t('routes.guide.GuidePage.disagree') }}</BodyText
+                  >
+                </StackComponent>
               </StackComponent>
+            </CardComponent>
+            <StackComponent spacing="extra-small">
+              <BodyText size="medium">
+                {{ $t('routes.guide.GuidePage.text-method') }}
+              </BodyText>
+              <BodyText size="medium">
+                {{ $t('routes.guide.GuidePage.text-0') }}
+              </BodyText>
             </StackComponent>
-          </ResponsiveWrapper>
+          </StackComponent>
+          <StackComponent v-if="currentStep === 3" spacing="small">
+            <BodyText size="medium">
+              {{ $t('routes.guide.GuidePage.text-important') }}
+            </BodyText>
+            <!-- TODO: remove inline styles -->
+            <CardComponent
+              corner="bottom-right"
+              border
+              style="align-self: center"
+            >
+              <StackComponent horizontal centered spacing="small">
+                <IconComponent :icon="vkiStarOutlined" />
+                <IconComponent :icon="mdiArrowRight" size="small" />
+                <IconComponent
+                  :icon="vkiStarFilled"
+                  color="rgb(var(--palette-yellow))"
+                />
+                <BodyText size="medium"
+                  >= {{ $t('routes.guide.GuidePage.important') }}</BodyText
+                >
+              </StackComponent>
+            </CardComponent>
+            <BodyText size="medium">
+              {{ $t('routes.guide.GuidePage.double-weight') }}
+            </BodyText>
+          </StackComponent>
+          <StackComponent v-if="currentStep === 4" spacing="small">
+            <BodyText size="medium">
+              {{ $t('routes.guide.GuidePage.skip-question') }}
+            </BodyText>
+            <CardComponent
+              corner="bottom-right"
+              border
+              style="align-self: center"
+            >
+              <StackComponent horizontal spacing="small">
+                <IconComponent :icon="mdiArrowRight" />
+                <BodyText size="medium"
+                  >= {{ $t('routes.guide.GuidePage.skip') }}</BodyText
+                >
+              </StackComponent>
+            </CardComponent>
+            <BodyText size="medium">
+              {{ $t('routes.guide.GuidePage.not-included') }}
+            </BodyText>
+          </StackComponent>
+          <template #after>
+            <ResponsiveWrapper medium large extra-large huge>
+              <IconButton
+                v-if="farthestCompletedStep >= currentStep"
+                @click="handleNextClick"
+              >
+                <IconComponent :icon="mdiArrowRight" :title="nextButtonTitle" />
+              </IconButton>
+            </ResponsiveWrapper>
+          </template>
+        </StepWrapper>
+        <template #bottom-bar>
           <ResponsiveWrapper medium large extra-large huge>
-            <StackComponent horizontal spacing="large">
-              <CardComponent
-                corner="bottom-left"
-                padding="large"
-                border
-                border-radius="large"
-                shadow
-                class="other-calc-card calc-youth"
-              >
-                <StackComponent spacing="large" centered>
-                  <StackComponent spacing="small" centered space-between>
-                    <BodyText size="medium" tag="h2" color="fg-strong">
-                      <strong>Parkolási jövőképek</strong>
-                    </BodyText>
-                    <BodyText size="small">
-                      40 kérdés, nagyjából 10 perc
-                    </BodyText>
-                    <ButtonComponent
-                      kind="filled"
-                      color="primary"
-                      @click="
-                        router.push({
-                          name: appRoutes.guide.name,
-                          params: {
-                            ...route.params,
-                            type: `${'valasztasok'}`,
-                            first: 'parkolasi-jovokepek',
-                            second: 'voksmonitor',
-                          },
-                          query: { ...route.query },
-                        })
-                      "
-                    >
-                    A Voksmonitor elindítása
-                      <template #iconAfter>
-                        <IconComponent :icon="mdiArrowRight" />
-                      </template>
-                    </ButtonComponent>
-                    <ButtonComponent
-                      kind="outlined"
-                      color="primary"
-                      @click="
-                        router.push({
-                          name: appRoutes.guide.name,
-                          params: {
-                            ...route.params,
-                            type: `${'valasztasok'}`,
-                            first: 'parkolasi-jovokepek',
-                            second: 'english',
-                          },
-                          query: { ...route.query },
-                        })
-                      "
-                    >
-                    English version
-                      <template #iconAfter>
-                        <IconComponent :icon="mdiArrowRight" />
-                      </template>
-                    </ButtonComponent>
-                  </StackComponent>
-                </StackComponent>
-              </CardComponent>
-            </StackComponent>
-          </ResponsiveWrapper>
-        </StackComponent>
-      </StackComponent>
-    </div>
-    <StaticContentLayout>
-      <StackComponent class="section" spacing="small" centered>
-        <TitleText size="large" tag="h2">Hogyan készül a Voksmonitor?</TitleText>
-        <BodyText size="medium"
-          >A Voksmonitor a K-Monitor és a KohoVolit.eu nonprofit szervezetek közös projektje, ami a pártok programjára alapozva segít mérlegelni, hogy kire szavazzon.</BodyText
-        >
-        <div class="info-bubbles-grid section">
-          <InfoBubble image="info-1.png">
-            <BodyText size="small"
-              > A kérdőív körülbelül 40 kérdésben méri fel a kitöltő álláspontját aktuális európai politikai témákról.
-            </BodyText>
-          </InfoBubble>
-          <InfoBubble image="info-2.png">
-            <BodyText size="small"
-              >A kérdéseket minden listát állító, érdemi támogatottsággal rendelkező pártnak feltettük.
-            </BodyText>
-          </InfoBubble>
-          <InfoBubble image="info-3.png">
-            <BodyText size="small"
-              >A válaszaikat összevetjük az Ön válaszaival.
-            </BodyText>
-          </InfoBubble>
-          <InfoBubble image="info-4.png">
-            <BodyText size="small"
-              >A Voksmonitor pedig kiszámolja, hogy Ön mennyire ért velük egyet.
-</BodyText
-            >
-          </InfoBubble>
-        </div>
-      </StackComponent>
-      <StackComponent class="section" spacing="large" centered>
-        <BodyText size="medium"
-          >A Voksmonitor célja a tájékoztatás és a választói mérlegelés segítése. A végső döntést a szavazófülkében Ön hozza meg.
-        </BodyText>
-        <ButtonComponent kind="link" @click="router.push('/a-voksmonitorrol')">
-          <div class="button-content">
-            Tudjon meg többet!<IconComponent :icon="mdiArrowRight"></IconComponent>
-          </div>
-        </ButtonComponent>
-      </StackComponent>
-      <section class="subscribe">
-        <StackComponent spacing="small" centered>
-          <TitleText size="large" tag="h2">
-            Érdekel a következő Voksmonitor
-          </TitleText>
-          <BodyText size="small" centered>
-            Iratkozz fel és értesítünk, ha új Voksmonitort indítunk
-          </BodyText>
-          <BodyText v-if="success" size="small">
-            {{ message }}
-          </BodyText>
-          <form v-if="!success">
-            <StackComponent
-              horizontal
-              spacing="small"
-              stretched
-              wrap
-              style="justify-content: center"
-            >
-              <TextInputComponent
-                v-model="email"
-                required
-                type="email"
-                :placeholder="t('routes.index.IndexPage.input-label')"
-                :value="email"
-                :icon="mdiEmailOutline"
-                :disabled="posting"
-                :error="emailError"
-              />
+            <BottomBar class="bottom-bar" transparent>
+              <LabelText class="text">
+                {{ $t('routes.guide.GuidePage.guide') }}
+                {{ currentStep }}&hairsp;/&hairsp;{{ stepsCount }}
+              </LabelText>
+              <StepProgress class="progress-indicator" :current="currentStep" />
               <ButtonComponent
-                kind="outlined"
-                color="primary"
-                :loading="posting"
-                @click.prevent="handleSubscribe"
+                class="next-button"
+                :kind="nextButtonKind"
+                :color="nextButtonColor"
+                @click="handleNextClick"
               >
-                Elküld
+                {{ nextButtonTitle }}
+                <template #iconAfter>
+                  <IconComponent :icon="mdiArrowRight" />
+                </template>
               </ButtonComponent>
-            </StackComponent>
-          </form>
-          <BodyText v-if="!success" tag="p" size="small">{{
-            $t('routes.index.IndexPage.disclaimer')
-          }}</BodyText>
-        </StackComponent>
-      </section>
-      <DonateBlock />
-    </StaticContentLayout>
-    <FooterMultiWord class="section" />
-  </StickyHeaderLayout>
+              <ButtonComponent
+                class="skip-button"
+                kind="link"
+                @click="goToQuestions"
+              >
+                {{ $t('routes.guide.GuidePage.skip-guide') }}
+                <template #iconAfter>
+                  <IconComponent :icon="mdiFastForward" />
+                </template>
+              </ButtonComponent>
+            </BottomBar>
+          </ResponsiveWrapper>
+          <ResponsiveWrapper extra-small small>
+            <BottomBar class="bottom-bar">
+              <LabelText class="text">
+                {{ $t('routes.guide.GuidePage.guide') }}
+                {{ currentStep }}&hairsp;/&hairsp;{{ stepsCount }}
+              </LabelText>
+              <StepProgress class="progress-indicator" :current="currentStep" />
+              <ButtonComponent
+                class="next-button"
+                :kind="nextButtonKind"
+                :color="nextButtonColor"
+                @click="handleNextClick"
+              >
+                {{ nextButtonTitle }}
+                <template #iconAfter>
+                  <IconComponent :icon="mdiArrowRight" />
+                </template>
+              </ButtonComponent>
+              <ButtonComponent
+                class="skip-button"
+                kind="link"
+                @click="goToQuestions"
+              >
+                {{ $t('routes.guide.GuidePage.skip-guide') }}
+                <template #iconAfter>
+                  <IconComponent :icon="mdiFastForward" />
+                </template>
+              </ButtonComponent>
+            </BottomBar>
+          </ResponsiveWrapper>
+        </template>
+      </BottomBarWrapper>
+    </StickyHeaderLayout>
+  </BackgroundComponent>
 </template>
 
-<style scoped lang="scss">
-.prezident-hero {
-  box-sizing: border-box;
-  position: relative;
-  max-width: 100%;
+<style lang="scss" scoped>
+.bottom-bar {
   display: grid;
-  column-gap: 24px;
-  overflow: hidden;
-  padding-top: 7%;
-
-  .calc-main {
-    text-align: center;
-    padding: 24px;
-  }
-
-  .other-calcs {
-    width: 100%;
-    padding: 24px;
-    text-align: center;
-    display: grid;
-    gap: 24px;
-  }
-
-  .other-calcs > * {
-    width: 100%;
-    padding: 16px;
-    display: grid;
-  }
-
-  .blob1 {
-    position: absolute;
-    left: 10%;
-  }
-
-  .blob2 {
-    position: absolute;
-    right: 10%;
-    top: 10%;
-  }
-
-  @media (min-width: 768px) {
-    display: grid;
-    grid-template-columns: repeat(12, minmax(0, 1fr));
-
-    .calc-main {
-      grid-row: 1/6;
-      grid-column: 2/12;
-      margin-bottom: 16px;
-    }
-
-    .other-calcs {
-      grid-row: 6;
-      grid-column: 2/12;
-      grid-template-columns: 1fr 1fr;
-      padding: 0;
-    }
-  }
-
-  @media (min-width: 992px) {
-    .other-calcs {
-      grid-column: 3/11;
-    }
-  }
-
-  @media (min-width: 1200px) {
-    .other-calcs {
-      grid-column: 4/10;
-    }
-  }
-}
-
-.section-header {
-  display: grid;
-  grid-template-columns: 1.2fr repeat(1, 1fr);
-  grid-template-rows: 1fr;
-  grid-column-gap: 16px;
-  grid-row-gap: 16px;
-
-  @media (max-width: 767px) {
-    grid-template-columns: 1fr;
-  }
-}
-
-.section {
-  padding: 40px 0;
-}
-
-.wrapper {
-  display: grid;
+  grid-template-columns: repeat(2, 8rem);
+  gap: var(--spacing-small);
   justify-content: center;
-  align-items: center;
-  padding: var(--spacing-large);
-}
 
-.card {
-  max-width: 60rem;
-}
-
-.card-election {
-  width: 100%;
-  max-width: 600px;
-}
-
-.card-content {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-.card-content-text {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.divider {
-  width: 100%;
-  height: 2px;
-  background-color: rgb(var(--color-neutral-bg));
-}
-
-.button-content {
-  display: flex;
-  flex-direction: row;
-  gap: 4px;
-}
-
-.info-bubbles-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: 1fr;
-  grid-column-gap: 32px;
-  grid-row-gap: 32px;
-
-  @media (max-width: 767px) {
+  /* TODO: update breakpoint */
+  @media (max-width: 700px) {
     grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(2, 1fr);
   }
 
-  @media (max-width: 478px) {
-    grid-template-columns: 1fr;
-    grid-template-rows: repeat(4, 1fr);
+  .text {
+    grid-column: 1;
+    justify-self: start;
   }
-}
 
-.navigation-bar {
-  .grid {
-    display: grid;
-    align-items: center;
-    grid-template-columns: auto auto 1fr;
-
-    @media (max-width: 700px) {
-      grid-template-columns: 1fr auto 1fr;
-    }
-
-    .title {
-      justify-self: center;
-      margin-left: var(--spacing-medium);
-      margin-right: var(--spacing-medium);
-    }
-
-    .right {
-      justify-content: end;
-    }
+  .progress-indicator {
+    grid-column: 2;
+    justify-self: end;
   }
-}
 
-.subscribe {
-  padding-top: 40px;
-  display: grid;
-  align-content: center;
-  justify-content: center;
+  .next-button {
+    grid-column: 1 / span 2;
+    grid-row: 2;
+  }
+
+  .skip-button {
+    visibility: v-bind(skipButtonVisibility);
+    grid-column: 1 / span 2;
+    grid-row: 3;
+    justify-self: center;
+  }
 }
 </style>
