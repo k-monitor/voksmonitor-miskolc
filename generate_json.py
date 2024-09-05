@@ -26,7 +26,7 @@ for row in rows[1:]:
         'id': qid,
         'title': row[0],
         "statement": row[0],
-        "details": row[1],
+        "detail": row[1],
         "tags": [''],
     })
     for i, candidate in enumerate(candidates):
