@@ -113,6 +113,15 @@ const handleAvatarClick = () => router.push(appRoutes.profile);
       spacing-responsive
     >
       <slot name="right">
+        <BodyText size="small">
+          <a href="#">Adatkezelési tájékoztató</a>
+        </BodyText>
+        <BodyText size="small">
+          <a href="#">Felhasználási feltételek</a>
+        </BodyText>
+        <BodyText size="small">
+          <a href="#">Támogatás?</a>
+        </BodyText>
         <AvatarComponent
           v-if="withAccount && user"
           size="small"

@@ -240,44 +240,6 @@ onUnmounted(() => {
       <template #header>
         <NavigationBar transparent>
           <template #title>{{ breadcrumbs }}</template>
-          <template #right>
-            <EmbedWrapper>
-              <ResponsiveWrapper medium large extra-large huge>
-                <ButtonComponent
-                  kind="link"
-                  @click="
-                    router.push({
-                      name: appRoutes.index.name,
-                      query: { ...route.query },
-                    })
-                  "
-                >
-                  {{ $t('routes.guide.GuidePage.back-to-main-page') }}
-                  <template #iconAfter>
-                    <IconComponent :icon="mdiCloseCircleOutline" />
-                  </template>
-                </ButtonComponent>
-              </ResponsiveWrapper>
-              <ResponsiveWrapper extra-small small>
-                <ButtonComponent
-                  kind="link"
-                  @click="
-                    router.push({
-                      name: appRoutes.index.name,
-                      query: { ...route.query },
-                    })
-                  "
-                >
-                  <template #icon>
-                    <IconComponent
-                      :icon="mdiCloseCircleOutline"
-                      :title="$t('routes.guide.GuidePage.back-to-main-page')"
-                    />
-                  </template>
-                </ButtonComponent>
-              </ResponsiveWrapper>
-            </EmbedWrapper>
-          </template>
         </NavigationBar>
       </template>
       <template #sticky-header>
