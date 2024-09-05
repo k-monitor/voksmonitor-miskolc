@@ -63,7 +63,7 @@ const starIcon = computed(() =>
           }}</BodyText>
         </StackComponent>
       </ResponsiveWrapper> -->
-      <ResponsiveWrapper extra-small small medium>
+      <!-- <ResponsiveWrapper extra-small small medium>
         <IconButton class="important">
           <IconComponent
             :icon="starIcon"
@@ -73,7 +73,7 @@ const starIcon = computed(() =>
             @click="starClick"
           />
         </IconButton>
-      </ResponsiveWrapper>
+      </ResponsiveWrapper> -->
       <ResponsiveWrapper small medium large extra-large huge>
         <ButtonComponent
           class="in-favour"
