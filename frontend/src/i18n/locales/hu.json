@@ -110,7 +110,7 @@
         "link-title": "Podmienkami ochrany osobných údajov",
         "log-in": "Prihláste sa",
         "notification": "Vaše osobné údaje budú spracovávané za účelom tvorby užívateľského profilu, a to v súlade s",
-        "opinion": "Sledujte názorový vývoj vo svojom profile",
+        "opinion ": "Sledujte názorový vývoj vo svojom profile",
         "question-one": "Už máte profil?",
         "question-two": "Ešte nemáte profil?",
         "registration": "Vytvoriť profil",
@@ -241,6 +241,9 @@
         "you-may": ""
       },
       "ResultShareModal": {
+        "hashtag1": "Elections",
+        "hashtag2": "Elections2024",
+        "hashtag3": "VotingMonitor",
         "share-facebook": "Megosztás Facebookon",
         "share-now": "Megosztás most",
         "share-title": "Voksmonitor2024",
