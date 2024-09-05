@@ -283,6 +283,10 @@ onUnmounted(() => {
             <BodyText size="medium">
               <MarkdownIt :markdown="text" />
             </BodyText>
+            <img src="https://www.xpress.hu/images/thumbs/004/0049368_tesz-vesz-varos-4-mirax-kiadas.jpeg"/>
+            <BodyText size="medium">
+              Lehet ám képet is rakni ide.
+            </BodyText>
           </StackComponent>
           <StackComponent v-if="currentStep === 2" spacing="small">
             <BodyText size="medium">{{
