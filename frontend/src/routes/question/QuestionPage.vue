@@ -132,7 +132,7 @@ const goToRecap = () => {
 
 const goToGuide = (params: RouteParams) => {
   router.push({
-    name: appRoutes.guide.name,
+    name: "index",
     params,
     query: { ...route.query },
   });

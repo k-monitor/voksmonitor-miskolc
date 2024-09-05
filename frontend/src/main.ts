@@ -95,7 +95,7 @@ export const appRoutes = {
   },
   cindex: {
     name: 'cindex', //only for testing purposes
-    path: '/:step(\\d+)?|/',
+    path: '/:step(\\d+)?',
     component: IndexPageVue,
     meta: {
       title: 'Voksmonitor',
