@@ -9,6 +9,7 @@ import {
   mdiArrowRight,
   mdiAccountCircleOutline,
   mdiEmailOutline,
+  mdiArrowDown,
 } from '@mdi/js';
 
 import { appRoutes } from '@/main';
@@ -100,6 +101,13 @@ const handleShowComparsionClick = () => {
     params: { ...route.params },
     query: { ...route.query },
   });
+};
+
+const goToForm = () => {
+  const element = document.querySelector('a[name="jelentkezes"]');
+  if (element) {
+    element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
 };
 
 const handleShareClick = () => {
@@ -357,19 +365,36 @@ onUnmounted(() => {
               $t('routes.result.ResultPage.display-not-advancing-candidates')
             }}
           </CheckboxComponent>
+          <ButtonComponent
+                  class="desktop"
+                  kind="filled"
+                  color="primary"
+                  @click="goToForm"
+                >
+                  Jelentkezz
+                  <template #iconAfter>
+                    <IconComponent :icon="mdiArrowDown" />
+                  </template>
+          </ButtonComponent>
           <ResultCategory
             :result="resultsGeneral"
             category="general"
             :max-visible-candidates="6"
           />
-          <iframe 
-            :src="`https://docs.google.com/forms/d/e/1FAIpQLSeMvM2hQqN7kH8UmS0bSXQcu-7bSNHn9i3GDKWfmpYBPsPoHA/viewform?usp=pp_url&entry.584894938=${ra_kozos}&entry.1510674861=${ra_15min}&entry.276333858=${ra_fent}&entry.2052211534=${ra_tech}&entry.2053574064=${ra_auto}&entry.632598064=${ra_gazd}`" 
-            width="640" 
-            height="743" 
-            frameborder="0" 
-            marginheight="0" 
-            marginwidth="0"
-          ></iframe>
+          <a name="jelentkezes" href="#jelentkezes">
+          <TitleText tag="p" size="medium">Jelentkezés</TitleText>
+          </a>
+
+          <div id="framediv" class=".card .card--shadow .card--border-normal">
+            <iframe allowtransparency="true" style="background: #FFF;"
+              :src="`https://docs.google.com/forms/d/e/1FAIpQLSeMvM2hQqN7kH8UmS0bSXQcu-7bSNHn9i3GDKWfmpYBPsPoHA/viewform?usp=pp_url&entry.584894938=${ra_kozos}&entry.1510674861=${ra_15min}&entry.276333858=${ra_fent}&entry.2052211534=${ra_tech}&entry.2053574064=${ra_auto}&entry.632598064=${ra_gazd}`" 
+              width="100%" 
+              height="743" 
+              frameborder="0" 
+              marginheight="0" 
+              marginwidth="0"
+            ></iframe>
+          </div>
         </StackComponent>
         <StackComponent v-else class="main" spacing="medium">
           <CardComponent corner="bottom-left">
@@ -468,6 +493,28 @@ onUnmounted(() => {
 </template>
 
 <style lang="scss" scoped>
+iframe {
+}
+
+#framediv {
+  background-color: rgb(var(--color-neutral-bg-container));
+  --7b38ec86-border\.width: var(--responsive-border-thin);
+  --7b38ec86-border\.radius: var(--responsive-radius-small);
+  --7b38ec86-padding\.vertical: calc(var(--responsive-gap-medium) - var(--responsive-border-thin));
+  --7b38ec86-padding\.horizontal: calc(var(--responsive-gap-medium) - var(--responsive-border-thin));
+  box-shadow: 6px 8px 0px 0px rgba(var(--color-neutral-shadow), var(--transparency-20));
+  border-color: rgb(var(--color-neutral-border));
+  border-style: solid;
+  border-width: var(--7b38ec86-border\.width);
+  border-radius: var(--7b38ec86-border\.radius);
+  padding-top: var(--7b38ec86-padding\.vertical);
+  padding-right: var(--7b38ec86-padding\.horizontal);
+  padding-bottom: var(--7b38ec86-padding\.vertical);
+  padding-left: var(--7b38ec86-padding\.horizontal);
+  padding: 4px;
+  background: #f6f6f6;
+}
+
 .navbar-btn-wrapper {
   display: flex;
   flex-direction: row;
