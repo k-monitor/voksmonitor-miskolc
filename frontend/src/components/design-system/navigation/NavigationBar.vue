@@ -114,13 +114,10 @@ const handleAvatarClick = () => router.push(appRoutes.profile);
     >
       <slot name="right">
         <BodyText size="small">
-          <a href="#">Adatkezelési tájékoztató</a>
+          <a href="https://adatbazis.k-monitor.hu/egyeb/adatkezelesi-tajekoztato">Adatkezelési tájékoztató</a>
         </BodyText>
         <BodyText size="small">
-          <a href="#">Felhasználási feltételek</a>
-        </BodyText>
-        <BodyText size="small">
-          <a href="#">Támogatás?</a>
+          <a href="#">Támogatás/Valami</a>
         </BodyText>
         <AvatarComponent
           v-if="withAccount && user"
