@@ -139,6 +139,24 @@ const toggleClick = () => {
         :max="100"
       ></SimpleProgress>
     </div>
+    <div class="toggle">
+      <IconButton @click="toggleClick">
+        <IconComponent
+          :icon="isExpanded ? mdiChevronUp : mdiChevronDown"
+          size="medium"
+          :title="$t('routes.recap.RecapQuestionCard.display-details')"
+        />
+      </IconButton>
+    </div>
+    <StackComponent
+      v-show="isExpanded"
+      class="expansion"
+      spacing="small"
+      spacing-responsive
+    >
+      <BodyText size="medium">{{ "Részletes leírás, képek, mindenféle jóság." }}</BodyText>
+    </StackComponent>
+
     <div class="secondary-text">
       <div class="party-wrapper">
         <BodyText v-if="!expert" size="medium">{{
