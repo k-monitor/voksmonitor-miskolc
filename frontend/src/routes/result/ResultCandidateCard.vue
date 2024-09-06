@@ -66,6 +66,7 @@ const toggleClick = () => {
     border
     shadow
     padding="medium"
+    @click="toggleClick"
   >
     <div class="avatar desktop">
       <AvatarComponent
@@ -140,13 +141,11 @@ const toggleClick = () => {
       ></SimpleProgress>
     </div>
     <div class="toggle">
-      <IconButton @click="toggleClick">
         <IconComponent
           :icon="isExpanded ? mdiChevronUp : mdiChevronDown"
           size="medium"
           :title="$t('routes.recap.RecapQuestionCard.display-details')"
         />
-      </IconButton>
     </div>
     <StackComponent
       v-show="isExpanded"
@@ -259,7 +258,13 @@ const toggleClick = () => {
   }
 }
 
+.result-question-card:hover {
+  -webkit-filter: brightness(97%);
+  filter: brightness(97%);
+}
+
 .result-question-card {
+  cursor: pointer;
   max-width: 100%;
   display: grid;
   // grid-template-columns: 4.5rem 1fr 4.5rem auto;
