@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { mdiChevronUp, mdiChevronDown } from '@mdi/js';
+import { useRoute, useRouter } from 'vue-router';
+import { appRoutes } from '@/main';
 
 import { useElectionStore } from '@/stores/electionStore';
 import {
@@ -15,6 +17,7 @@ import DividerComponent from '../../components/design-system/containers/DividerC
 import ResultCardContacts from './ResultCardContacts.vue';
 import SimpleProgress from '../../components/design-system/indicators/SimpleProgress.vue';
 import IconComponent from '../../components/design-system/icons/IconComponent.vue';
+import ButtonComponent from '@/components/design-system/input/ButtonComponent.vue';
 
 import AvatarComponent from '@/components/design-system/other/AvatarComponent.vue';
 
@@ -29,6 +32,15 @@ export interface ResultCandidateCardProps {
   expert: boolean;
 }
 
+const candidates = {
+  'd578d28c-dbac-4bae-9cc4-963b506e0101': 'kozossegi-kozlekedes',
+  '7a6f9a15-2e71-4bca-a45d-94680f9b4755': '15-perces-varos',
+  '94b53e83-7875-4c16-9ccf-4becae64f089': 'fenntarthato-varos',
+  '1a93946b-27ba-4fd2-a05b-6474b276815c': 'technokrata-varos',
+  'df6eee27-f75d-430b-bc22-dc3cafa2bc90': 'autokozpontu-varos',
+  '1ad707e9-a9c8-4e92-a244-00e156ad25a2': 'regios-gazdasagi-kozpont',
+}
+
 const { t, locale } = useI18n();
 
 const props = defineProps<ResultCandidateCardProps>();
@@ -38,6 +50,9 @@ const candidate = store.calculator?.candidates.find(
 );
 let avatarConfig = avatarsConfiguration.general;
 let primaryColor = '--palette-primary-50';
+const router = useRouter();
+const route = useRoute();
+
 switch (props.category) {
   case 'environment':
     avatarConfig = avatarsConfiguration.environment;
@@ -50,6 +65,8 @@ switch (props.category) {
   default:
     break;
 }
+
+const candidateName = candidates[props.canidateId] || '';
 
 const isExpanded = ref(false);
 const toggleClick = () => {
@@ -154,6 +171,20 @@ const toggleClick = () => {
       spacing-responsive
     >
       <BodyText size="medium">{{ "Részletes leírás, képek, mindenféle jóság." }}</BodyText>
+      <div class="button-container">
+        <ButtonComponent
+                    kind="filled"
+                    color="primary"
+                    @click="
+                      router.push({
+                        path: '/jovokepek/'+candidateName,
+                        query: { },
+                      })
+                    "
+                  >
+                  Bővebben
+        </ButtonComponent>
+      </div>
     </StackComponent>
 
     <div class="secondary-text">
@@ -168,23 +199,6 @@ const toggleClick = () => {
         <BodyText size="medium" v-if="expert">
           Közforrásokból származó adatok
         </BodyText>
-        <!--
-        <div
-          v-for="(party, i) in candidate?.parties"
-          :key="party.id"
-          class="party"
-        >
-          <img
-            v-if="party.img_url"
-            class="party-logo"
-            :src="`/${party.img_url}`"
-            :alt="'nologo'"
-          />
-          <BodyText size="medium"
-            >{{ i !== 0 ? ',\u0020' : '' }}{{ party.name }}</BodyText
-          >
-        </div>
-        //-->
       </div>
     </div>
     <TitleText
@@ -232,6 +246,13 @@ const toggleClick = () => {
 </template>
 
 <style lang="scss" scoped>
+
+.button-container {
+  display: flex;
+  justify-content: flex-end; /* Aligns the button to the right */
+  padding: 4px;
+}
+
 .motto-title {
   margin-bottom: var(--responsive-spacing-extra-small);
 }

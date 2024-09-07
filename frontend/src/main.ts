@@ -151,6 +151,15 @@ export const appRoutes = {
       title: 'Voksmonitor',
     },
   },
+  jovokepek: {
+    name: 'jovokepek',
+    path: '/jovokepek/:election/vyber',
+    alias: '/jovokepek/:election',
+    component: DistrictSelectionPageVue,
+    meta: {
+      title: 'Voksmonitor',
+    },
+  },
   guide: {
     name: 'guide',
     path: `/:type(${'kalkulacka'}|${'valasztasok'})/:first/:second?/:third?/:fourth?/${'utmutato'}/:step(\\d+)?`,

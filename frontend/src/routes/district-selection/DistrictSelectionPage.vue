@@ -36,13 +36,17 @@ const electionDescription = election.description;
 
 const breadcrumbs = electionName;
 
-// TODO: Replace with data from store
-const title =
-  route.params.first === 'senatni-2022'
-    ? 'Zvolte svůj senátní obvod'
-    : 'Zvolte své město';
+const jovokepek = {
+  'kozossegi-kozlekedes': { name: "Közösségi közlekedésen alapuló város", text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." },
+  '15-perces-varos': { name: "15 perces város", text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." },
+  'fenntarthato-varos': { name: "Fenntartható város", text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." },
+  'technokrata-varos': { name: "Technokrata város", text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." },
+  'autokozpontu-varos': { name: "Autóközpontú város", text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." },
+  'regios-gazdasagi-kozpont': { name : "Régiós gazdasági központ", text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." },
+};
+const title = jovokepek[route.params.election]?.name || '';
 
-const text = electionDescription;
+const text = jovokepek[route.params.election]?.text || '';
 
 const options = electionStore.districts.map((district) => {
   const normalizedName = stringToNormalizedHyphenated(district.name);
@@ -89,27 +93,9 @@ const onSubmit = () => {
                     })
                   "
                 >
-                  Zpět na hlavní stránku
+                  Vissza a főoldalra
                   <template #iconAfter>
                     <IconComponent :icon="mdiCloseCircleOutline" />
-                  </template>
-                </ButtonComponent>
-              </ResponsiveWrapper>
-              <ResponsiveWrapper extra-small small>
-                <ButtonComponent
-                  kind="link"
-                  @click="
-                    router.push({
-                      name: appRoutes.index.name,
-                      query: { ...route.query },
-                    })
-                  "
-                >
-                  <template #icon>
-                    <IconComponent
-                      :icon="mdiCloseCircleOutline"
-                      title="Zpět na hlavní stránku"
-                    />
                   </template>
                 </ButtonComponent>
               </ResponsiveWrapper>
@@ -132,52 +118,10 @@ const onSubmit = () => {
       <form id="district-form" ref="form" @submit.prevent="onSubmit">
         <BottomBarWrapper>
           <div class="main">
-            <StackComponent spacing="medium">
-              <BodyText size="medium">
-                <StackComponent spacing="extra-small">
-                  <MarkdownIt :markdown="text" />
-                </StackComponent>
-              </BodyText>
-              <!-- TODO: remove inline styles -->
-              <div class="list" style="align-self: stretch">
-                <RadioButtonComponent
-                  v-for="option in options"
-                  :key="option.value"
-                  v-model="selected"
-                  group-name="district-selection"
-                  :value="option.value"
-                >
-                  {{ option.label }}
-                </RadioButtonComponent>
-              </div>
-            </StackComponent>
+            <BodyText tag="p" size="medium">
+              {{ text }}
+            </BodyText>
           </div>
-          <template #bottom-bar>
-            <ResponsiveWrapper medium large extra-large huge>
-              <BottomBar class="bottom-bar" transparent>
-                <ButtonComponent
-                  kind="filled"
-                  type="submit"
-                  color="primary"
-                  :disabled="!selected"
-                >
-                  Potvrdit a pokračovat
-                </ButtonComponent>
-              </BottomBar>
-            </ResponsiveWrapper>
-            <ResponsiveWrapper extra-small small>
-              <BottomBar class="bottom-bar">
-                <ButtonComponent
-                  kind="filled"
-                  type="submit"
-                  color="primary"
-                  :disabled="!selected"
-                >
-                  Potvrdit a pokračovat
-                </ButtonComponent>
-              </BottomBar>
-            </ResponsiveWrapper>
-          </template>
         </BottomBarWrapper>
       </form>
     </StickyHeaderLayout>
