@@ -66,7 +66,8 @@ switch (props.category) {
     break;
 }
 
-const candidateName = candidates[props.canidateId] || '';
+const candidateKey = props.canidateId as keyof typeof candidates;
+const candidateName = candidates[candidateKey] || '';
 
 const isExpanded = ref(false);
 const toggleClick = () => {
