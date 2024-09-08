@@ -23,6 +23,7 @@ import QuestionCard from '@/components/QuestionCard.vue';
 import CardComponent from '../../components/design-system/containers/CardComponent.vue';
 
 import { useI18n } from 'vue-i18n';
+import IconButton from '@/components/design-system/input/IconButton.vue';
 
 export interface Props {
   questions: DeprecatedQuestion[];
@@ -172,6 +173,7 @@ export interface Source {
         class="header"
         :style="{ 'grid-column': 2 * index + 2, 'grid-row': 1 }"
       >
+      <IconButton>
         <FilledCircle
           size="extra-large"
           style="padding: var(--spacing-extra-small)"
@@ -190,7 +192,8 @@ export interface Source {
             >
           </BodyText>
         </FilledCircle>
-      </div>
+      </IconButton>
+    </div>
     </template>
     <template
       v-for="(question, questionIndex) in questionsToShow"
