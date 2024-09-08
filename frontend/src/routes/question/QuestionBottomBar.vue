@@ -103,7 +103,7 @@ const starIcon = computed(() =>
           class="skip"
           kind="answer"
           @click="skipClick"
-          color="white"
+          color="neutral"
           :selected="answer.answer === UserAnswerEnum.skip"
         >
           <template #icon>

@@ -325,16 +325,6 @@ onUnmounted(() => {
             <template #after>
               <div class="navbar-btn-wrapper">
                 <ButtonComponent
-                  kind="link"
-                  color="primary"
-                  @click="handleShareClick"
-                >
-                  <template #icon>
-                    <IconComponent :icon="mdiShareVariantOutline" />
-                  </template>
-                  {{ $t('routes.result.ResultPage.share') }}
-                </ButtonComponent>
-                <ButtonComponent
                   class="desktop"
                   kind="filled"
                   color="primary"

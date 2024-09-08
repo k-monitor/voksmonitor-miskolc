@@ -92,9 +92,6 @@ const toggleClick = () => {
         <BodyText size="small">
           {{ currentQuestion }}/{{ questionCount }}
         </BodyText>
-        <BodyText class="desktop" size="small">
-          {{ question.name }}
-        </BodyText>
         <TagComponent v-for="tag in question.tags" :key="tag">
           {{ tag }}
         </TagComponent>
@@ -103,9 +100,6 @@ const toggleClick = () => {
     <StackComponent class="text">
       <BodyText class="desktop" size="medium">
         <strong>{{ question.title }}</strong>
-      </BodyText>
-      <BodyText class="mobile" size="small">
-        {{ question.name }}
       </BodyText>
       <BodyText v-show="isExpanded" class="mobile" size="medium">
         <strong>{{ question.title }}</strong>
