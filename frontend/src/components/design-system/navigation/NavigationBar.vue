@@ -117,7 +117,7 @@ const handleAvatarClick = () => router.push(appRoutes.profile);
           <a href="https://adatbazis.k-monitor.hu/egyeb/adatkezelesi-tajekoztato">Adatkezelési tájékoztató</a>
         </BodyText>
         <BodyText size="small">
-          <a href="#">Támogatás/Valami</a>
+          <a href="/about">A projektről</a>
         </BodyText>
         <AvatarComponent
           v-if="withAccount && user"
