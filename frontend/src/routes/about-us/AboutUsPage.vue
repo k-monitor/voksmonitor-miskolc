@@ -142,8 +142,6 @@ import LogoComponent from '@/components/design-system/style/LogoComponent.vue';
           a felek vagy személyek sorrendje véletlenszerűen kerül meghatározásra.
         </BodyText>
       </StackComponent>
-      <DonateBlock />
-      <FooterMultiWord />
     </StaticContentLayout>
   </BackgroundComponent>
 </template>

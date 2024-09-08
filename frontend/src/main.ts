@@ -102,11 +102,11 @@ export const appRoutes = {
     },
   },
   aboutUs: {
-    name: 'a-voksmonitorrol',
-    path: '/a-voksmonitorrol',
+    name: 'about',
+    path: '/about',
     component: AboutUsPageVue,
     meta: {
-      title: 'A Voksmonitorról',
+      title: 'A projektről',
     },
   },
   aboutElections: {
