@@ -126,13 +126,13 @@ const backRoute = computed(
     router.resolve(router.options.history.state.back as string),
 );
 
-const stepsCount = 4;
+const stepsCount = 5;
 const currentStep = computed(() => parseInt(route.params.step as string) || 1);
 const farthestCompletedStep = ref(
   Math.max(
     currentStep.value - 1,
     forwardRoute.value && forwardRoute.value.name === appRoutes.question.name
-      ? 4
+      ? 5
       : 0,
     backRoute.value && backRoute.value.name === appRoutes.question.name ? 4 : 0,
   ),
@@ -289,6 +289,11 @@ onUnmounted(() => {
             </BodyText>
           </StackComponent>
           <StackComponent v-if="currentStep === 2" spacing="small">
+            <BodyText size="medium">
+              Új oldal.
+            </BodyText>
+          </StackComponent>
+          <StackComponent v-if="currentStep === 3" spacing="small">
             <BodyText size="medium">{{
               $t('routes.guide.GuidePage.text-answer-button')
             }}</BodyText>
@@ -327,7 +332,7 @@ onUnmounted(() => {
               </BodyText>
             </StackComponent>
           </StackComponent>
-          <StackComponent v-if="currentStep === 3" spacing="small">
+          <StackComponent v-if="currentStep === 4" spacing="small">
             <BodyText size="medium">
               {{ $t('routes.guide.GuidePage.text-important') }}
             </BodyText>
@@ -353,7 +358,7 @@ onUnmounted(() => {
               {{ $t('routes.guide.GuidePage.double-weight') }}
             </BodyText>
           </StackComponent>
-          <StackComponent v-if="currentStep === 4" spacing="small">
+          <StackComponent v-if="currentStep === 5" spacing="small">
             <BodyText size="medium">
               {{ $t('routes.guide.GuidePage.skip-question') }}
             </BodyText>
