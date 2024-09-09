@@ -52,6 +52,7 @@ export const useElectionStore = defineStore('election', {
   state: () => {
     return {
       election: undefined as DeprecatedElection | undefined,
+      selectedElectionKey: null as null | string,
       districts: [] as DeprecatedCalculators['calculators'],
       calculator: undefined as DeprecatedCalculator | undefined,
       answers: [] as UserAnswer[],
@@ -79,6 +80,9 @@ export const useElectionStore = defineStore('election', {
     },
   },
   actions: {
+    setSelectedElectionKey(key: string) {
+      this.selectedElectionKey = key;
+    },
     flipAnswerFlag(questionNr: number) {
       if (questionNr < this.answers.length) {
         this.answers[questionNr].flag = !this.answers[questionNr].flag;
