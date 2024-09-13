@@ -1,3 +1,21 @@
+# Voksmonitor Miskolc
+
+Ez az eredeti [voksmonitor](https://github.com/kalkulacka-one/volebni-kalkulacka-2022/tree/voksmonitor) módosítása. Ez elsősorban a frontend személyre szabását jelenti a konkrét problémára. Plusz egy adatbetöltő python scriptet, ami egy bizonyos formátumú Google Sheet-ből kiexportált csv-t (`jovokepek.csv`) alakít a voksmonitor saját formátumára.
+
+Használat:
+
+```bash
+python generate_json.py
+```
+
+```bash
+cd frontend
+
+npm run dev
+# vagy
+npm run build
+```
+
 # volebni-kalkulacka-2022
 
 Volební kalkulačka, nová verze s Česko.Digital v roce 2022
