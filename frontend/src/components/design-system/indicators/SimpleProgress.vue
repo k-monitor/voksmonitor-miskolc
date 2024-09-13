@@ -12,6 +12,19 @@ const props = defineProps<SimpleProgressProps>();
 const width = computed(() =>
   props.max !== 0 ? `${(props.value / props.max) * 100}%` : '0%',
 );
+const color = computed(() =>
+  {
+    if (props.value < 20)
+      return "#C62828"
+    if (props.value < 40)
+      return "#EF6C00"
+    if (props.value < 60)
+      return "#F9A825"
+    if (props.value < 80)
+      return "#9E9D24"
+    return "#2E7D32"
+  }
+);
 </script>
 
 <template>
@@ -34,7 +47,7 @@ const width = computed(() =>
   height: 100%;
 }
 .bar {
-  background-color: v-bind('props.colorPrimary');
+  background-color: v-bind('color');
   border-radius: calc(v-bind('props.height') * 0.5);
   width: v-bind('width');
   height: 100%;
