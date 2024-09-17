@@ -1,9 +1,9 @@
 [
   {
     "id": "516ffd6f-0632-4061-86c5-fb9252f15bc1",
-    "name": "Közösségi közlekedésen alapuló város",
-    "shortName": "Közösségi közlekedésen alapuló város",
-    "sortName": "Közösségi közlekedésen alapuló város",
+    "name": "Közösségi közlekedés városa",
+    "shortName": "Közösségi közlekedés városa",
+    "sortName": "Közösségi közlekedés városa",
     "type": "candidate-list",
     "party": "Európai Szocialisták Pártja",
     "group": "Szocialisták és Demokraták Progresszív Szövetsége"
@@ -26,16 +26,16 @@
   },
   {
     "id": "855bace4-f913-4d99-be70-fb391b17dd85",
-    "name": "Technokrata város",
-    "shortName": "Technokrata város",
-    "sortName": "Technokrata város",
+    "name": "Hi-tech város",
+    "shortName": "Hi-tech város",
+    "sortName": "Hi-tech város",
     "type": "candidate-list"
   },
   {
     "id": "b0df4b9d-9272-426b-8cf7-b4e7ed6e1220",
-    "name": "Autóközpontú",
-    "shortName": "Autóközpontú",
-    "sortName": "Autóközpontú",
+    "name": "Autóközpontú város",
+    "shortName": "Autóközpontú város",
+    "sortName": "Autóközpontú város",
     "type": "candidate-list",
     "party": "Európai Kalózpárt",
     "group": "Zöldek/Európai Szabad Szövetség"
