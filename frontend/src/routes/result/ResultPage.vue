@@ -295,18 +295,6 @@ onUnmounted(() => {
             <TitleText tag="h2" size="medium">{{
               $t('routes.result.ResultPage.my-match')
             }}</TitleText>
-            <template #after>
-              <ButtonComponent
-                kind="link"
-                color="primary"
-                @click="handleShareClick"
-              >
-                <template #icon>
-                  <IconComponent :icon="mdiShareVariantOutline" />
-                </template>
-                Sdílet
-              </ButtonComponent>
-            </template>
           </SecondaryNavigationBar>
         </ResponsiveWrapper>
         <ResponsiveWrapper medium large extra-large huge>
@@ -361,7 +349,11 @@ onUnmounted(() => {
                   color="primary"
                   @click="goToForm"
                 >
+                <div
+                style="white-space: normal;display: inline-block;"
+                >
                 Miskolci vagy? Vegyél részt a személyes párbeszédben!
+                </div>
                   <template #iconAfter>
                     <IconComponent :icon="mdiArrowDown" />
                   </template>
