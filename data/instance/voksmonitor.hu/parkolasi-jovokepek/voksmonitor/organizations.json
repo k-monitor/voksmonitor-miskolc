@@ -46,35 +46,5 @@
     "shortName": "Régiós gazdasági központ",
     "sortName": "Régiós gazdasági központ",
     "type": "candidate-list"
-  },
-  {
-    "id": "b3cdf59f-d9f8-4d98-8e8b-3102a676cc39",
-    "name": "Mi Hazánk Mozgalom",
-    "shortName": "Mi Hazánk",
-    "sortName": "Mi Hazánk",
-    "type": "candidate-list"
-  },
-  {
-    "id": "aa8a8b31-44c8-439c-b1c7-975c21d98a55",
-    "name": "Mindenki Magyarországa Néppárt",
-    "shortName": "MMNP",
-    "sortName": "MMNP",
-    "type": "candidate-list"
-  },
-  {
-    "id": "cfb67cc8-532c-454a-a91e-30f36755b2ea",
-    "name": "Momentum Mozgalom",
-    "shortName": "Momentum",
-    "sortName": "Momentum",
-    "type": "candidate-list",
-    "party": "Liberálisok és Demokraták Szövetsége Európáért Párt",
-    "group": "Újítsuk meg Európát"
-  },
-  {
-    "id": "a9b9a340-2312-4c4e-967d-b23ccac5d9f5",
-    "name": "TISZA (Tisztelet és Szabadság)",
-    "shortName": "TISZA",
-    "sortName": "TISZA",
-    "type": "candidate-list"
   }
 ]
