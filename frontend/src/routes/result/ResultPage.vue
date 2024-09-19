@@ -361,7 +361,7 @@ onUnmounted(() => {
                   color="primary"
                   @click="goToForm"
                 >
-                  Jelentkezz
+                Miskolci vagy? Vegyél részt a személyes párbeszédben!
                   <template #iconAfter>
                     <IconComponent :icon="mdiArrowDown" />
                   </template>
