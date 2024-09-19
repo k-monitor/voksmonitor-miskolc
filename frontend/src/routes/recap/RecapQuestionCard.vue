@@ -98,10 +98,7 @@ const toggleClick = () => {
       </StackComponent>
     </div>
     <StackComponent class="text">
-      <BodyText class="desktop" size="medium">
-        <strong>{{ question.title }}</strong>
-      </BodyText>
-      <BodyText v-show="isExpanded" class="mobile" size="medium">
+      <BodyText size="medium">
         <strong>{{ question.title }}</strong>
       </BodyText>
     </StackComponent>
