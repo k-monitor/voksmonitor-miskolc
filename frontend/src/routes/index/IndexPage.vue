@@ -28,6 +28,7 @@ import SecondaryNavigationBar from '@/components/design-system/navigation/Second
 import StackComponent from '@/components/design-system/layout/StackComponent.vue';
 import StepProgress from '@/components/design-system/other/StepProgress.vue';
 import StepWrapper from '@/components/design-system/layout/StepWrapper.vue';
+import HeadlineText from '@/components/design-system/typography/HeadlineText.vue';
 
 import {
   vkiLogoInFavour,
@@ -126,13 +127,13 @@ const backRoute = computed(
     router.resolve(router.options.history.state.back as string),
 );
 
-const stepsCount = 5;
+const stepsCount = 4;
 const currentStep = computed(() => parseInt(route.params.step as string) || 1);
 const farthestCompletedStep = ref(
   Math.max(
     currentStep.value - 1,
     forwardRoute.value && forwardRoute.value.name === appRoutes.question.name
-      ? 5
+      ? 4
       : 0,
     backRoute.value && backRoute.value.name === appRoutes.question.name ? 4 : 0,
   ),
@@ -275,28 +276,43 @@ onUnmounted(() => {
           </template>
           <StackComponent v-if="currentStep === 1" spacing="small">
             <HeadingComponent kind="title" size="medium">
-              {{ electionName }}
+              Közlekedési teszt
               <template #secondary
-                ><small>{{ districtNameWithCode }}</small></template
+                ><small>Milyen jövőben gondolkodsz?</small></template
               >
             </HeadingComponent>
             <BodyText size="medium">
-              <MarkdownIt :markdown="text" />
+              2040 még bő másfél évtized! Nem sci-fi távolság, nem lesznek repülő autóink, kiborg komornyikok és csillagközi nyaralásra sem utazhatunk, de a mindennapi életünk így is alaposan megváltozik majd. Képzeljük el a találkozást a 2040-es önmagunkkal. Lesz, aki házasságot kötött, új lakásba költözött és időközben ledobott vagy felszedett néhány kilót. Azt, milyen irányba fordul az életünk, a ma meghozott döntéseink befolyásolják.
             </BodyText>
-            <img src="https://www.xpress.hu/images/thumbs/004/0049368_tesz-vesz-varos-4-mirax-kiadas.jpeg"/>
+
             <BodyText size="medium">
-              Lehet ám képet is rakni ide.
+              És a város ahol élünk, az vajon hogyan változik? Máshogy néznek ki a köztereink? Digitálisan vagy személyesen érintkezünk egymással? Milyenek lesznek a munkahelyek, hol vásárolunk? Komótosabban és több döccenővel, de a városi élet keretei is a benne élő emberek döntései és igényei mentén formálódnak. Épített környezetünk és a közlekedésünk olyan lesz, amilyenné közösen tesszük.
             </BodyText>
+
+            <BodyText size="medium">
+              Ez a teszt segít átgondolni, hogy milyen lenne az a város, ami a mostani egyéni választásaink, olykor tudatos, olykor kényelmi alapon kialakított szokásaink szerint fejlődik. Nagyjából 35 gombnyomással kiderítheted, hogyan hat 15 éves időtávon az, ha valamiből többet akarsz, másból kevesebbet az utakon és a köztereken. Tedd próbára, hogyan nézne ki 2040-ben a város, ha annak a te mostani választásaid szabnának irányt!
+            </BodyText>
+
           </StackComponent>
           <StackComponent v-if="currentStep === 2" spacing="small">
+            <HeadlineText tag="h3" size="small">Kedves miskolciak!</HeadlineText>
+            
             <BodyText size="medium">
-              Új oldal.
+              A K-Monitor és a Dialóg által, a Járókelő szakértőinek bevonásával kidolgozott közlekedési tesztet ti próbálhatjátok ki először. A tesztnek nem célja ítéletet mondani a közlekedéssel kapcsolatos elképzelésekről, csupán elgondolkodtatni szeretne arról, milyen városban élünk most, és milyenben szeretnénk a jövőben. A teszthez tartozó hat alternatív jövőkép segít átgondolni, milyen következményekkel járnak a mai választásaink, és hogyan függnek össze egymással a városi élettel, közlekedéssel kapcsolatos szakpolitikai döntések, amelyekről várhatóan még a mainál is élénkebb vita bontakozik majd ki a következő években.
+            </BodyText>
+
+            <BodyText size="medium">
+              A jövőképek különböző városokat, ha úgy tetszik, alternatív Miskolcokat mutatnak be: hi-tech, autóközpontú, fenntartható, 15 perces, közösségi közlekedésen alapuló és régiós iparváros. A teszt eredményeként azt láthatod, hogy jobban vagy kevésbé, de mindegyik vízió tartalmaz olyan elemeket, amelyekkel azonosulni tudsz. Ez azért fontos, mert a valóságban nem egymást kizáró, egymással ellentétben álló elképzelések csatáznak egymással, hanem a városban élő, különböző igényű embereknek közösen, egymással párbeszédben kell kialakítaniuk egy mindenki számára elfogadható irányt.
+            </BodyText>
+
+            <BodyText size="medium">
+              A kérdőív miskolci kitöltőit ezért egy interaktív fórumra hívjuk, ahol a Dialóg Egyesület szervezésében a különböző jövőképekhez közeli résztvevők megvitathatják, milyen közlekedést szeretnének Miskolcon 2040-ben! Jelentkezz az eseményre a teszt végén!
             </BodyText>
           </StackComponent>
           <StackComponent v-if="currentStep === 3" spacing="small">
-            <BodyText size="medium">{{
-              $t('routes.guide.GuidePage.text-answer-button')
-            }}</BodyText>
+            <BodyText size="medium">
+              A teszt során 33 állítással kapcsolatban kell kinyilvánítanod az álláspontodat:
+            </BodyText>
             <CardComponent
               corner="bottom-right"
               border
@@ -309,7 +325,7 @@ onUnmounted(() => {
                     color="rgb(var(--color-primary-fg))"
                   />
                   <BodyText size="medium"
-                    >= {{ $t('routes.guide.GuidePage.agree') }}</BodyText
+                    >= {{ "Egyetértek" }}</BodyText
                   >
                 </StackComponent>
                 <StackComponent horizontal spacing="small">
@@ -318,23 +334,32 @@ onUnmounted(() => {
                     color="rgb(var(--color-secondary-fg))"
                   />
                   <BodyText size="medium"
-                    >= {{ $t('routes.guide.GuidePage.disagree') }}</BodyText
+                    >= {{ "Nem értek egyet" }}</BodyText
+                  >
+                </StackComponent>
+                <StackComponent horizontal spacing="small">
+                  <IconComponent
+                    :icon="vkiLogoNeutral"
+                    color="#333"
+                  />
+                  <BodyText size="medium"
+                    >= {{ "Nem tudom / nem érdekel" }}</BodyText
                   >
                 </StackComponent>
               </StackComponent>
             </CardComponent>
             <StackComponent spacing="extra-small">
               <BodyText size="medium">
-                {{ $t('routes.guide.GuidePage.text-method') }}
-              </BodyText>
-              <BodyText size="medium">
-                {{ $t('routes.guide.GuidePage.text-0') }}
-              </BodyText>
+              Amennyiben a válaszod megegyezik egy jövőképhez rendelt válasszal, az egy pontot ér. Amennyiben ellentétes a válasz, egy pontot levonunk.
+            </BodyText>
+            <BodyText size="medium">
+              Ha nincs álláspontod a témáról, vagy nem szeretnél válaszolni, a Nem tudom / nem érdekel gombra kattintva, vagy a jobb oldalon található nyíllal továbbléphetsz. Amennyiben egy jövőképhez nem tartozik egyértelmű álláspont, vagy te nem foglaltál állást, úgy a választ nem értékeljük.
+            </BodyText>
             </StackComponent>
           </StackComponent>
           <StackComponent v-if="currentStep === 4" spacing="small">
             <BodyText size="medium">
-              {{ $t('routes.guide.GuidePage.text-important') }}
+              A kérdőív végén áttekintheted és módosíthatod a válaszaidat, és csillaggal jelölheted a számodra fontos témákat. Ezeket a program dupla súllyal veszi számításba.
             </BodyText>
             <!-- TODO: remove inline styles -->
             <CardComponent
@@ -349,34 +374,8 @@ onUnmounted(() => {
                   :icon="vkiStarFilled"
                   color="rgb(var(--palette-yellow))"
                 />
-                <BodyText size="medium"
-                  >= {{ $t('routes.guide.GuidePage.important') }}</BodyText
-                >
               </StackComponent>
             </CardComponent>
-            <BodyText size="medium">
-              {{ $t('routes.guide.GuidePage.double-weight') }}
-            </BodyText>
-          </StackComponent>
-          <StackComponent v-if="currentStep === 5" spacing="small">
-            <BodyText size="medium">
-              {{ $t('routes.guide.GuidePage.skip-question') }}
-            </BodyText>
-            <CardComponent
-              corner="bottom-right"
-              border
-              style="align-self: center"
-            >
-              <StackComponent horizontal spacing="small">
-                <IconComponent :icon="mdiArrowRight" />
-                <BodyText size="medium"
-                  >= {{ $t('routes.guide.GuidePage.skip') }}</BodyText
-                >
-              </StackComponent>
-            </CardComponent>
-            <BodyText size="medium">
-              {{ $t('routes.guide.GuidePage.not-included') }}
-            </BodyText>
           </StackComponent>
           <template #after>
             <ResponsiveWrapper medium large extra-large huge>

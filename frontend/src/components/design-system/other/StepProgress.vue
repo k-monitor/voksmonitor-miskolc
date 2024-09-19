@@ -5,7 +5,7 @@ export interface Props {
 
 const props = defineProps<Props>();
 
-const totalSteps = 5;
+const totalSteps = 4;
 </script>
 
 <template>
