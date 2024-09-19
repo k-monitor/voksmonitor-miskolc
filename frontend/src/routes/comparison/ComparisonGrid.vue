@@ -136,6 +136,19 @@ export interface Source {
   title?: string;
   url: string;
 }
+
+const candidates = {
+  'd578d28c-dbac-4bae-9cc4-963b506e0101': 'kozossegi-kozlekedes',
+  '7a6f9a15-2e71-4bca-a45d-94680f9b4755': '15-perces-varos',
+  '94b53e83-7875-4c16-9ccf-4becae64f089': 'fenntarthato-varos',
+  '1a93946b-27ba-4fd2-a05b-6474b276815c': 'hi-tech-varos',
+  'df6eee27-f75d-430b-bc22-dc3cafa2bc90': 'autokozpontu-varos',
+  '1ad707e9-a9c8-4e92-a244-00e156ad25a2': 'regios-gazdasagi-kozpont',
+}
+
+const circleClick = (candidateId: keyof typeof candidates) => {
+  window.open("/jovokepek/"+candidates[candidateId], '_blank');
+}
 </script>
 
 <template>
@@ -173,7 +186,9 @@ export interface Source {
         class="header"
         :style="{ 'grid-column': 2 * index + 2, 'grid-row': 1 }"
       >
-      <IconButton>
+      <IconButton
+        @click="() => circleClick(candidateId)"
+      >
         <FilledCircle
           size="extra-large"
           style="padding: var(--spacing-extra-small)"
