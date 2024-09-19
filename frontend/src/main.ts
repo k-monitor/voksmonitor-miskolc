@@ -90,7 +90,7 @@ export const appRoutes = {
     path: '/',
     component: IndexPageVue,
     meta: {
-      title: 'Voksmonitor',
+      title: 'Közlekedési teszt',
     },
   },
   cindex: {
@@ -98,7 +98,7 @@ export const appRoutes = {
     path: '/:step(\\d+)?',
     component: IndexPageVue,
     meta: {
-      title: 'Voksmonitor',
+      title: 'Közlekedési teszt',
     },
   },
   aboutUs: {
@@ -139,7 +139,7 @@ export const appRoutes = {
     props: true,
     component: ErrorPageVue,
     meta: {
-      title: 'Error - Voksmonitor',
+      title: 'Error - Közlekedési teszt',
     },
   },
   districtSelection: {
@@ -148,7 +148,7 @@ export const appRoutes = {
     alias: '/valasztasok/:election',
     component: DistrictSelectionPageVue,
     meta: {
-      title: 'Voksmonitor',
+      title: 'Közlekedési teszt',
     },
   },
   jovokepek: {
@@ -157,7 +157,7 @@ export const appRoutes = {
     alias: '/jovokepek/:election',
     component: DistrictSelectionPageVue,
     meta: {
-      title: 'Voksmonitor',
+      title: 'Közlekedési teszt',
     },
   },
   guide: {
@@ -165,7 +165,7 @@ export const appRoutes = {
     path: `/:type(${'kalkulacka'}|${'valasztasok'})/:first/:second?/:third?/:fourth?/${'utmutato'}/:step(\\d+)?`,
     component: GuidePageVue,
     meta: {
-      title: 'Útmutató - Voksmonitor',
+      title: 'Útmutató - Közlekedési teszt',
     },
   },
   question: {
@@ -173,7 +173,7 @@ export const appRoutes = {
     path: `/:type(${'kalkulacka'}|${'valasztasok'})/:first/:second?/:third?/:fourth?/${'kerdes'}/:nr(\\d+)?`,
     component: QuestionPageVue,
     meta: {
-      title: 'Kérdés $$ - Voksmonitor',
+      title: 'Kérdés $$ - Közlekedési teszt',
       hasNumber: true,
     },
     beforeEnter: questionGuard,
@@ -183,7 +183,7 @@ export const appRoutes = {
     path: `/:type(${'kalkulacka'}|${'valasztasok'})/:first/:second?/:third?/:fourth?/${'osszegzes'}/:nr(\\d+)?`,
     component: RecapPageVue,
     meta: {
-      title: 'Összegzés - Voksmonitor',
+      title: 'Összegzés - Közlekedési teszt',
     },
   },
   result: {
@@ -191,7 +191,7 @@ export const appRoutes = {
     path: `/:type(${'kalkulacka'}|${'valasztasok'})/:first/:second?/:third?/:fourth?/${'egyezeseim'}`,
     component: ResultPageVue,
     meta: {
-      title: 'Egyezéseim - Voksmonitor',
+      title: 'Egyezéseim - Közlekedési teszt',
     },
   },
   comparison: {
@@ -199,7 +199,7 @@ export const appRoutes = {
     path: `/:type(${'kalkulacka'}|${'valasztasok'})/:first/:second?/:third?/:fourth?/${'osszehasonlitas'}`,
     component: ComparisonPageVue,
     meta: {
-      title: 'Összehasonlítás - Voksmonitor',
+      title: 'Összehasonlítás - Közlekedési teszt',
     },
   },
   share: {
@@ -207,7 +207,7 @@ export const appRoutes = {
     path: '/share/:uuid',
     component: SharePageVue,
     meta: {
-      title: 'Egyezéseim - Voksmonitor',
+      title: 'Egyezéseim - Közlekedési teszt',
     },
   },
   login: {
