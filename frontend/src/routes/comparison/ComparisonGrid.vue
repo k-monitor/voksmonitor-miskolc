@@ -187,7 +187,7 @@ const circleClick = (candidateId: keyof typeof candidates) => {
         :style="{ 'grid-column': 2 * index + 2, 'grid-row': 1 }"
       >
       <IconButton
-        @click="() => circleClick(candidateId)"
+        @click="() => circleClick(candidateId as keyof typeof candidates)"
       >
         <FilledCircle
           size="extra-large"
