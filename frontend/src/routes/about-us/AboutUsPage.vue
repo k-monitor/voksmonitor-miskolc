@@ -48,7 +48,7 @@ import logos from "./logos.png";
         </BodyText>
         
         <BodyText size="large">
-          A jövőképeket grafikus illusztrációval és részletes leírással <a href="https://kozlekedes2040.hu/jovokepek/kozossegi-kozlekedes">itt böngészheted</a>.
+          <b>A jövőképeket grafikus illusztrációval és részletes leírással <a href="https://kozlekedes2040.hu/jovokepek/kozossegi-kozlekedes">itt böngészheted</a>.</b>
         </BodyText>
 
         <BodyText size="large">
