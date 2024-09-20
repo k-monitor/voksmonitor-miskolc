@@ -295,18 +295,18 @@ onUnmounted(() => {
 
           </StackComponent>
           <StackComponent v-if="currentStep === 2" spacing="small">
-            <HeadlineText tag="h3" size="small">Kedves miskolciak!</HeadlineText>
+            <HeadlineText tag="h3" size="extra-small">Kedves miskolciak!</HeadlineText>
             
             <BodyText size="medium">
-              A K-Monitor és a Dialóg által, a Járókelő szakértőinek bevonásával kidolgozott közlekedési tesztet ti próbálhatjátok ki először. A tesztnek nem célja ítéletet mondani a közlekedéssel kapcsolatos elképzelésekről, csupán elgondolkodtatni szeretne arról, milyen városban élünk most, és milyenben szeretnénk a jövőben. A teszthez tartozó hat alternatív jövőkép segít átgondolni, milyen következményekkel járnak a mai választásaink, és hogyan függnek össze egymással a városi élettel, közlekedéssel kapcsolatos szakpolitikai döntések, amelyekről várhatóan még a mainál is élénkebb vita bontakozik majd ki a következő években.
+              A <a href="https://www.dialogegyesulet.hu/">Dialóg</a>, a <a href="https://k-monitor.hu/">K-Monitor</a> és a <a href="https://jarokelo.hu/">Járókelő</a> szakértői által kidolgozott közlekedési tesztet ti próbálhatjátok ki először! Az oldal a válaszok alapján megmutatja, hogy a hat jövőkép - hat alternatív Miskolc - közül a kitöltő melyikhez áll a legközelebb. Ezek segítenek átgondolni, milyen következményekkel járnak a választásaink, és hogyan függnek össze a városi élettel, közlekedéssel kapcsolatos szakpolitikai döntések.
             </BodyText>
 
             <BodyText size="medium">
-              A jövőképek különböző városokat, ha úgy tetszik, alternatív Miskolcokat mutatnak be: hi-tech, autóközpontú, fenntartható, 15 perces, közösségi közlekedésen alapuló és régiós iparváros. A teszt eredményeként azt láthatod, hogy jobban vagy kevésbé, de mindegyik vízió tartalmaz olyan elemeket, amelyekkel azonosulni tudsz. Ez azért fontos, mert a valóságban nem egymást kizáró, egymással ellentétben álló elképzelések csatáznak egymással, hanem a városban élő, különböző igényű embereknek közösen, egymással párbeszédben kell kialakítaniuk egy mindenki számára elfogadható irányt.
+              A teszt nem mond ítéletet a jövőképekről, csupán elgondolkodtatni szeretne arról, milyen városban élünk most és milyenben szeretnénk a jövőben. A víziók nem egymást kizáró fejlődési utak. A valóságban sem összeegyeztethetetlen elképzelések csatáznak egymással, hanem ezek valamilyen ötvözete valósul meg. A városban élő, különböző igényű embereknek közösen, egymással párbeszédben kell kialakítaniuk egy mindenki számára elfogadható irányt.
             </BodyText>
 
             <BodyText size="medium">
-              A kérdőív miskolci kitöltőit ezért egy interaktív fórumra hívjuk, ahol a Dialóg Egyesület szervezésében a különböző jövőképekhez közeli résztvevők megvitathatják, milyen közlekedést szeretnének Miskolcon 2040-ben! Jelentkezz az eseményre a teszt végén!
+              A kérdőív miskolci kitöltőit ezért egy interaktív fórumra hívjuk, ahol a Dialóg Egyesület szervezésében a különböző jövőképekhez közeli résztvevők megvitathatják, milyen közlekedést szeretnének Miskolcon 2040-ben. Jelentkezz az eseményre a teszt végén!
             </BodyText>
           </StackComponent>
           <StackComponent v-if="currentStep === 3" spacing="small">
