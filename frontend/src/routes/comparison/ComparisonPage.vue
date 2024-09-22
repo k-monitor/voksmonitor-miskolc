@@ -53,7 +53,7 @@ const districtNameWithCode = showDistrictCode
   ? `${districtName} (${districtCode})`
   : districtName;
 
-const breadcrumbs = `${electionName} — ${districtNameWithCode}`;
+const breadcrumbs = `${electionName}`;
 const selectedTags = ref(new Set<string>(electionStore.uniqueQuestionTags));
 const selectedCandidateIds = ref(new Set<string>());
 

@@ -65,7 +65,7 @@ const districtNameWithCode = showDistrictCode
   ? `${districtName} (${districtCode})`
   : districtName;
 
-const breadcrumbs = `${electionName} — ${districtNameWithCode}`;
+const breadcrumbs = `${electionName}`;
 
 // TODO: Replace with data from store
 // const text =
