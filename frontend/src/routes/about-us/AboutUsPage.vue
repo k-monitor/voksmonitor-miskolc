@@ -24,16 +24,23 @@ import logos from "./logos.png";
           responsive-padding
           background="transparent"
         >
-          <div class="grid">
             <router-link to="/"
               ><LogoComponent responsive />
               <div class="title">
                 <BodyText size="small"> </BodyText></div
             ></router-link>
-            <StackComponent class="right" horizontal spacing="small">
+            <slot name="right">
+              <StackComponent class="right" horizontal spacing="small">
+                <BodyText size="small">
+                <a href="https://adatbazis.k-monitor.hu/egyeb/adatkezelesi-tajekoztato">Adatkezelési tájékoztató</a>
+              </BodyText>
+              <BodyText size="small">
+                <a href="/">Teszt</a>
+              </BodyText>
             </StackComponent>
-          </div>
-        </ContainerComponent>
+          </slot>
+          </ContainerComponent>
+
       </template>
     </StickyHeaderLayout>
     <StaticContentLayout>
@@ -76,4 +83,36 @@ import logos from "./logos.png";
 img {
   width: 100%;
 }
+.navigation-bar {
+  display: grid;
+  grid-template-columns: auto auto 1fr;
+  grid-template-areas: 'logo title right';
+  align-items: center;
+  gap: var(--responsive-spacing-large);
+  width: 100%;
+
+  .logo {
+    grid-area: logo;
+  }
+
+  .title {
+    grid-area: title;
+
+    &--centered {
+      grid-column-start: logo;
+      grid-column-end: right;
+      justify-self: center;
+    }
+  }
+
+  .right {
+    grid-area: right;
+    justify-content: end;
+  }
+}
+
+.user-avatar {
+  cursor: pointer;
+}
+
 </style>
