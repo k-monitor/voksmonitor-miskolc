@@ -77,7 +77,7 @@ const districtNameWithCode = showDistrictCode
   ? `${districtName} (${districtCode})`
   : districtName;
 
-const breadcrumbs = `${electionName}`;
+const breadcrumbs = ``;
 
 const handlePreviousClick = () => {
   router.push({

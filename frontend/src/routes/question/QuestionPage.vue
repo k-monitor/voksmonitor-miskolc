@@ -56,7 +56,7 @@ const districtNameWithCode = showDistrictCode
   ? `${districtName} (${districtCode})`
   : districtName;
 
-const breadcrumbs = `${electionName}`;
+const breadcrumbs = ``;
 
 const forwardRoute = computed(
   () =>
