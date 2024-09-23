@@ -16,12 +16,14 @@ const color = computed(() =>
   {
     if (props.value < 20)
       return "#C62828"
-    if (props.value < 40)
+    if (props.value < 35)
       return "#EF6C00"
-    if (props.value < 60)
+    if (props.value < 50)
       return "#F9A825"
-    if (props.value < 80)
+    if (props.value < 65)
       return "#9E9D24"
+    if (props.value < 80)
+      return "#558B2F"
     return "#2E7D32"
   }
 );
