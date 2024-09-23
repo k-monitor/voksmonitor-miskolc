@@ -24,13 +24,13 @@ for row in rows[1:]:
     qid = str(uuid.uuid4())
     questions.append({
         'id': qid,
-        'title': row[0],
-        "statement": row[0],
-        "detail": row[1],
-        "tags": [''],
+        'title': row[1],
+        "statement": row[1],
+        "detail": row[2],
+        "tags": [row[0]],
     })
     for i, candidate in enumerate(candidates):
-        answers[candidate].append({"questionId": qid, "answer": answer(row[(i+1)*2]), 'comment': row[(i+1)*2+1]})
+        answers[candidate].append({"questionId": qid, "answer": answer(row[1+(i+1)*2]), 'comment': row[1+(i+1)*2+1]})
 
 
 with open('data/instance/voksmonitor.hu/parkolasi-jovokepek/voksmonitor/questions.json', 'w') as json_file:
