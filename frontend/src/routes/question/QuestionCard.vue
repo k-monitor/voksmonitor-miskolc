@@ -37,6 +37,11 @@ defineProps<Props>();
         <BodyText size="small">
           {{ currentQuestion }}/{{ questionCount }}
         </BodyText>
+        <TagComponent v-for="tag in question.tags" :key="tag">
+          <BodyText size="medium">
+            {{ tag }}
+          </BodyText>
+        </TagComponent>
       </StackComponent>
       <HeadingComponent class="heading--desktop" kind="title" size="large">
         {{ question.title }}
