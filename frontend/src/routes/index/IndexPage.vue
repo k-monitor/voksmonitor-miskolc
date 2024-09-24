@@ -389,7 +389,7 @@ onUnmounted(() => {
           </template>
         </StepWrapper>
         <template #bottom-bar>
-          <ResponsiveWrapper medium large extra-large huge>
+          <ResponsiveWrapper >
             <BottomBar class="bottom-bar" transparent>
               <LabelText class="text">
                 {{ $t('routes.guide.GuidePage.guide') }}
@@ -419,7 +419,7 @@ onUnmounted(() => {
               </ButtonComponent>
             </BottomBar>
           </ResponsiveWrapper>
-          <ResponsiveWrapper extra-small small>
+          <ResponsiveWrapper extra-small small medium large extra-large huge>
             <BottomBar class="bottom-bar">
               <LabelText class="text">
                 {{ $t('routes.guide.GuidePage.guide') }}
@@ -465,6 +465,13 @@ onUnmounted(() => {
   /* TODO: update breakpoint */
   @media (max-width: 700px) {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (min-width: 700px) {
+    max-width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 15px;
   }
 
   .text {
