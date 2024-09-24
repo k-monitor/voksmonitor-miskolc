@@ -286,7 +286,7 @@ onUnmounted(() => {
             </BodyText>
 
             <BodyText size="medium">
-              És a város ahol élünk, az vajon hogyan változik? Máshogy néznek ki a köztereink? Digitálisan vagy személyesen érintkezünk egymással? Milyenek lesznek a munkahelyek, hol vásárolunk? Komótosabban és több döccenővel, de a városi élet keretei is a benne élő emberek döntései és igényei mentén formálódnak. Épített környezetünk és a közlekedésünk olyan lesz, amilyenné közösen tesszük.
+              És a város ahol élünk, az hogyan változik? Máshogy néznek ki a köztereink? Digitálisan vagy személyesen érintkezünk egymással? Milyenek lesznek a munkahelyek, hol vásárolunk? Évtizedes távlatban a városi élet keretei is a benne élő emberek szokásai és igényei mentén formálódnak. Épített környezetünk és a közlekedésünk olyan lesz, amilyenné közösen tesszük.  
             </BodyText>
 
             <BodyText size="medium">
