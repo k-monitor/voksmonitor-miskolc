@@ -479,7 +479,7 @@ iframe {
 }
 
 #framediv {
-  background-color: rgb(var(--color-neutral-bg-container));
+  // background-color: rgb(var(--color-neutral-bg-container));
   --7b38ec86-border\.width: var(--responsive-border-thin);
   --7b38ec86-border\.radius: var(--responsive-radius-small);
   --7b38ec86-padding\.vertical: calc(var(--responsive-gap-medium) - var(--responsive-border-thin));
@@ -494,7 +494,8 @@ iframe {
   padding-bottom: var(--7b38ec86-padding\.vertical);
   padding-left: var(--7b38ec86-padding\.horizontal);
   padding: 4px;
-  background: #f6f6f6;
+  // background: #f6f6f6;
+  background-color: rgb(250, 220, 220);
 }
 
 .navbar-btn-wrapper {
