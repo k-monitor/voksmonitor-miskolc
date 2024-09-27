@@ -35,7 +35,7 @@ import logos from "./logos.png";
                 <a href="https://adatbazis.k-monitor.hu/egyeb/adatkezelesi-tajekoztato" target="_blank">Adatkezelési tájékoztató</a>
               </BodyText>
               <BodyText size="small">
-                <a href="/">Teszt</a>
+                <a href="/">Teszt indítása</a>
               </BodyText>
             </StackComponent>
           </slot>
