@@ -418,37 +418,6 @@ onUnmounted(() => {
           </template>
         </StepWrapper>
         <template #bottom-bar>
-          <ResponsiveWrapper medium large extra-large huge>
-            <BottomBar class="bottom-bar" transparent>
-              <LabelText class="text">
-                {{ $t('routes.guide.GuidePage.guide') }}
-                {{ currentStep }}&hairsp;/&hairsp;{{ stepsCount }}
-              </LabelText>
-              <StepProgress class="progress-indicator" :current="currentStep" />
-              <ButtonComponent
-                class="next-button"
-                :kind="nextButtonKind"
-                :color="nextButtonColor"
-                @click="handleNextClick"
-              >
-                {{ nextButtonTitle }}
-                <template #iconAfter>
-                  <IconComponent :icon="mdiArrowRight" />
-                </template>
-              </ButtonComponent>
-              <ButtonComponent
-                class="skip-button"
-                kind="link"
-                @click="goToQuestions"
-              >
-                {{ $t('routes.guide.GuidePage.skip-guide') }}
-                <template #iconAfter>
-                  <IconComponent :icon="mdiFastForward" />
-                </template>
-              </ButtonComponent>
-            </BottomBar>
-          </ResponsiveWrapper>
-          <ResponsiveWrapper extra-small small>
             <BottomBar class="bottom-bar">
               <LabelText class="text">
                 {{ $t('routes.guide.GuidePage.guide') }}
@@ -471,13 +440,11 @@ onUnmounted(() => {
                 kind="link"
                 @click="goToQuestions"
               >
-                {{ $t('routes.guide.GuidePage.skip-guide') }}
                 <template #iconAfter>
                   <IconComponent :icon="mdiFastForward" />
                 </template>
               </ButtonComponent>
             </BottomBar>
-          </ResponsiveWrapper>
         </template>
       </BottomBarWrapper>
     </StickyHeaderLayout>
@@ -487,14 +454,11 @@ onUnmounted(() => {
 <style lang="scss" scoped>
 .bottom-bar {
   display: grid;
-  grid-template-columns: repeat(2, 8rem);
   gap: var(--spacing-small);
   justify-content: center;
 
   /* TODO: update breakpoint */
-  @media (max-width: 700px) {
     grid-template-columns: repeat(2, 1fr);
-  }
 
   .text {
     grid-column: 1;

@@ -114,7 +114,7 @@ const handleAvatarClick = () => router.push(appRoutes.profile);
     >
       <slot name="right">
         <BodyText size="small">
-          <a href="https://adatbazis.k-monitor.hu/egyeb/adatkezelesi-tajekoztato">Adatkezelési tájékoztató</a>
+          <a href="https://adatbazis.k-monitor.hu/egyeb/adatkezelesi-tajekoztato" target="_blank">Adatkezelési tájékoztató</a>
         </BodyText>
         <BodyText size="small">
           <a href="/about">A projektről</a>

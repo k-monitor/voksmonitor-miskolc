@@ -298,7 +298,7 @@ onUnmounted(() => {
             <HeadlineText tag="h3" size="extra-small">Kedves miskolciak!</HeadlineText>
             
             <BodyText size="medium">
-              A <a href="https://www.dialogegyesulet.hu/">Dialóg</a>, a <a href="https://k-monitor.hu/">K-Monitor</a> és a <a href="https://jarokelo.hu/">Járókelő</a> szakértői által kidolgozott közlekedési tesztet ti próbálhatjátok ki először! Az oldal a válaszok alapján megmutatja, hogy a hat jövőkép - hat alternatív Miskolc - közül a kitöltő melyikhez áll a legközelebb. Ezek segítenek átgondolni, milyen következményekkel járnak a választásaink, és hogyan függnek össze a városi élettel, közlekedéssel kapcsolatos szakpolitikai döntések.
+              A <a href="https://www.dialogegyesulet.hu/" target="_blank">Dialóg</a>, a <a href="https://k-monitor.hu/" target="_blank">K-Monitor</a> és a <a href="https://jarokelo.hu/" target="_blank">Járókelő</a> szakértői által kidolgozott közlekedési tesztet ti próbálhatjátok ki először! Az oldal a válaszok alapján megmutatja, hogy a hat jövőkép - hat alternatív Miskolc - közül a kitöltő melyikhez áll a legközelebb. Ezek segítenek átgondolni, milyen következményekkel járnak a választásaink, és hogyan függnek össze a városi élettel, közlekedéssel kapcsolatos szakpolitikai döntések.
             </BodyText>
 
             <BodyText size="medium">
