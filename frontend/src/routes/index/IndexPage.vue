@@ -359,7 +359,7 @@ onUnmounted(() => {
           </StackComponent>
           <StackComponent v-if="currentStep === 4" spacing="small">
             <BodyText size="medium">
-              A kérdőív végén áttekintheted és módosíthatod a válaszaidat, és csillaggal jelölheted a számodra fontos témákat. Ezeket a program dupla súllyal veszi számításba.
+              A kérdőív végén áttekintheted és módosíthatod a válaszaidat, és csillaggal jelölheted a számodra fontos témákat. Ezeknél az egyetértést vagy egyet nem értést a program dupla súllyal veszi számításba.
             </BodyText>
             <!-- TODO: remove inline styles -->
             <CardComponent
