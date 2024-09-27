@@ -161,14 +161,14 @@ onUnmounted(() => {
               </ButtonComponent>
             </template>
           </SecondaryNavigationBar>
-          <QuestionTagFilter
-            v-show="filterMenuIsVisible"
-            v-model="selectedTags"
-            class="filter-menu"
-          />
           <QuestionCandidateFilter
             v-show="filterMenuIsVisible"
             v-model="selectedCandidateIds"
+            class="filter-menu"
+          />
+          <QuestionTagFilter
+            v-show="filterMenuIsVisible"
+            v-model="selectedTags"
             class="filter-menu"
           />
         </ResponsiveWrapper>
@@ -197,14 +197,14 @@ onUnmounted(() => {
               </ButtonComponent>
             </template>
           </SecondaryNavigationBar>
-          <QuestionTagFilter
-            v-show="filterMenuIsVisible"
-            v-model="selectedTags"
-            class="filter-menu"
-          />
           <QuestionCandidateFilter
             v-show="filterMenuIsVisible"
             v-model="selectedCandidateIds"
+            class="filter-menu"
+          />
+          <QuestionTagFilter
+            v-show="filterMenuIsVisible"
+            v-model="selectedTags"
             class="filter-menu"
           />
         </ResponsiveWrapper>
