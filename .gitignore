@@ -137,3 +137,4 @@ coverage_html/
 .vercel
 node_modules
 .DS_Store
+frontend/vite.config.ts.timestamp-*.mjs
