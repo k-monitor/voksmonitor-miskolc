@@ -183,6 +183,7 @@ const toggleClick = () => {
       spacing="small"
       spacing-responsive
     >
+      <img :src="'/data/instance/voksmonitor.hu/parkolasi-jovokepek/voksmonitor/images/candidates/'+candidateName+'.webp'" width="100%">
       <BodyText size="medium">
         <div v-html="candidateText" />
       </BodyText>
@@ -202,20 +203,6 @@ const toggleClick = () => {
       </div>
     </StackComponent>
 
-    <div class="secondary-text">
-      <div class="party-wrapper">
-        <BodyText v-if="!expert" size="medium">{{
-          candidate?.type == 'person' &&
-          candidate?.parties &&
-          candidate?.parties.length > 0
-            ? candidate?.parties?.[0].name
-            : candidate?.name
-        }}</BodyText>
-        <BodyText size="medium" v-if="expert">
-          Közforrásokból származó adatok
-        </BodyText>
-      </div>
-    </div>
     <TitleText
       class="percentage desktop"
       tag="p"
