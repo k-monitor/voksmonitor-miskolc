@@ -163,6 +163,7 @@ const toggleElection = (key: string) => {
       </template>
         <BottomBarWrapper>
           <div class="main">
+            <img :src="'/data/instance/voksmonitor.hu/parkolasi-jovokepek/voksmonitor/images/candidates/'+electionStore.selectedElectionKey+'.webp'" width="100%">
             <BodyText tag="p" size="medium">
               <div v-html="text" />
             </BodyText>
@@ -201,6 +202,10 @@ const toggleElection = (key: string) => {
   .main {
     grid-template-columns: 1fr;
   }
+}
+
+img {
+  margin-bottom: 10px;
 }
 
 form {
