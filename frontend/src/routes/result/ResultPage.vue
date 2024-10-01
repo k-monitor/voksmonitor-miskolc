@@ -495,7 +495,7 @@ iframe {
   padding-left: var(--7b38ec86-padding\.horizontal);
   padding: 4px;
   // background: #f6f6f6;
-  background-color: rgb(250, 220, 220);
+  background-color: rgb(252, 234, 234);
 }
 
 .navbar-btn-wrapper {
