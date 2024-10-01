@@ -264,6 +264,11 @@ const toggleClick = () => {
   margin-left: 0px;
   margin-right: 0px;
 }
+.avatar {
+  margin-left: 0px;
+  margin-top: 6px;
+  margin-bottom: 2px;
+}
 .party-wrapper {
   display: flex;
   flex-direction: row;
