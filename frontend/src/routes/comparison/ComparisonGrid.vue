@@ -146,6 +146,24 @@ const candidates = {
   '1ad707e9-a9c8-4e92-a244-00e156ad25a2': 'regios-gazdasagi-kozpont',
 }
 
+const candidateColors = {
+  '7a6f9a15-2e71-4bca-a45d-94680f9b4755': '#78b6bf',
+  'd578d28c-dbac-4bae-9cc4-963b506e0101': '#c49a6d',
+  '94b53e83-7875-4c16-9ccf-4becae64f089': '#94eab3',
+  '1a93946b-27ba-4fd2-a05b-6474b276815c': '#2c63d1',
+  'df6eee27-f75d-430b-bc22-dc3cafa2bc90': '#9c7dab',
+  '1ad707e9-a9c8-4e92-a244-00e156ad25a2': '#ffe164',
+}
+
+const candidateFontColors = {
+  '7a6f9a15-2e71-4bca-a45d-94680f9b4755': '#fff',
+  'd578d28c-dbac-4bae-9cc4-963b506e0101': '#fff',
+  '94b53e83-7875-4c16-9ccf-4becae64f089': '#222',
+  '1a93946b-27ba-4fd2-a05b-6474b276815c': '#fff',
+  'df6eee27-f75d-430b-bc22-dc3cafa2bc90': '#fff',
+  '1ad707e9-a9c8-4e92-a244-00e156ad25a2': '#222',
+}
+
 const circleClick = (candidateId: keyof typeof candidates) => {
   window.open("/jovokepek/"+candidates[candidateId], '_blank');
 }
@@ -191,11 +209,12 @@ const circleClick = (candidateId: keyof typeof candidates) => {
       >
         <FilledCircle
           size="extra-large"
-          style="padding: var(--spacing-extra-small)"
+          :background-color="candidateColors[candidateId as keyof typeof candidateColors]"
+          :style='`padding: var(--spacing-extra-small);`'
         >
           <BodyText
             size="extra-small"
-            color="rgb(var(--color-neutral-fg-inverse))"
+            :color="candidateFontColors[candidateId as keyof typeof candidateFontColors]"
             :style="{ 'text-align': 'center' }"
           >
             <strong>

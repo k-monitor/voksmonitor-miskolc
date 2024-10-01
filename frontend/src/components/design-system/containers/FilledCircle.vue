@@ -54,8 +54,8 @@ const classes = computed(() => ({
   }
 
   &--extra-large {
-    width: calc(3 * var(--spacing-medium));
-    height: calc(3 * var(--spacing-medium));
+    width: calc(3.2 * var(--spacing-medium));
+    height: calc(3.2 * var(--spacing-medium));
   }
 }
 </style>
