@@ -127,13 +127,13 @@ const backRoute = computed(
     router.resolve(router.options.history.state.back as string),
 );
 
-const stepsCount = 4;
+const stepsCount = 3;
 const currentStep = computed(() => parseInt(route.params.step as string) || 1);
 const farthestCompletedStep = ref(
   Math.max(
     currentStep.value - 1,
     forwardRoute.value && forwardRoute.value.name === appRoutes.question.name
-      ? 4
+      ? 3
       : 0,
     backRoute.value && backRoute.value.name === appRoutes.question.name ? 4 : 0,
   ),
@@ -295,21 +295,6 @@ onUnmounted(() => {
 
           </StackComponent>
           <StackComponent v-if="currentStep === 2" spacing="small">
-            <HeadlineText tag="h3" size="extra-small">Kedves miskolciak!</HeadlineText>
-            
-            <BodyText size="medium">
-              A <a href="https://www.dialogegyesulet.hu/" target="_blank">Dialóg</a>, a <a href="https://k-monitor.hu/" target="_blank">K-Monitor</a> és a <a href="https://jarokelo.hu/" target="_blank">Járókelő</a> szakértői által kidolgozott közlekedési tesztet ti próbálhatjátok ki először! Az oldal a válaszok alapján megmutatja, hogy a hat jövőkép - hat alternatív Miskolc - közül a kitöltő melyikhez áll a legközelebb. Ezek segítenek átgondolni, milyen következményekkel járnak a választásaink, és hogyan függnek össze a városi élettel, közlekedéssel kapcsolatos szakpolitikai döntések.
-            </BodyText>
-
-            <BodyText size="medium">
-              A teszt nem mond ítéletet a jövőképekről, csupán elgondolkodtatni szeretne arról, milyen városban élünk most és milyenben szeretnénk a jövőben. A víziók nem egymást kizáró fejlődési utak. A valóságban sem összeegyeztethetetlen elképzelések csatáznak egymással, hanem ezek valamilyen ötvözete valósul meg. A városban élő, különböző igényű embereknek közösen, egymással párbeszédben kell kialakítaniuk egy mindenki számára elfogadható irányt.
-            </BodyText>
-
-            <BodyText size="medium">
-              A kérdőív miskolci kitöltőit ezért egy interaktív fórumra hívjuk, ahol a Dialóg Egyesület szervezésében a különböző jövőképekhez közeli résztvevők megvitathatják, milyen közlekedést szeretnének Miskolcon 2040-ben. Jelentkezz az eseményre a teszt végén!
-            </BodyText>
-          </StackComponent>
-          <StackComponent v-if="currentStep === 3" spacing="small">
             <BodyText size="medium">
               A teszt során 33 állítással kapcsolatban kell kinyilvánítanod az álláspontodat:
             </BodyText>
@@ -357,7 +342,7 @@ onUnmounted(() => {
             </BodyText>
             </StackComponent>
           </StackComponent>
-          <StackComponent v-if="currentStep === 4" spacing="small">
+          <StackComponent v-if="currentStep === 3" spacing="small">
             <BodyText size="medium">
               A kérdőív végén áttekintheted és módosíthatod a válaszaidat, és csillaggal jelölheted a számodra fontos témákat. Ezeknél az egyetértést vagy egyet nem értést a program dupla súllyal veszi számításba.
             </BodyText>

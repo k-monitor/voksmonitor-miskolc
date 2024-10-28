@@ -343,40 +343,11 @@ onUnmounted(() => {
               $t('routes.result.ResultPage.display-not-advancing-candidates')
             }}
           </CheckboxComponent>
-          <ButtonComponent
-                  class="desktop"
-                  kind="filled"
-                  color="primary"
-                  @click="goToForm"
-                >
-                <div
-                style="white-space: normal;display: inline-block;"
-                >
-                Miskolci vagy? Vegyél részt a személyes párbeszédben!
-                </div>
-                  <template #iconAfter>
-                    <IconComponent :icon="mdiArrowDown" />
-                  </template>
-          </ButtonComponent>
           <ResultCategory
             :result="resultsGeneral"
             category="general"
             :max-visible-candidates="6"
           />
-          <a name="jelentkezes" href="#jelentkezes">
-          <TitleText tag="p" size="medium">Jelentkezés</TitleText>
-          </a>
-
-          <div id="framediv" class=".card .card--shadow .card--border-normal">
-            <iframe allowtransparency="true" style="background: #FFF;"
-              :src="`https://docs.google.com/forms/d/e/1FAIpQLSeMvM2hQqN7kH8UmS0bSXQcu-7bSNHn9i3GDKWfmpYBPsPoHA/viewform?usp=pp_url&entry.584894938=${ra_kozos}&entry.1510674861=${ra_15min}&entry.276333858=${ra_fent}&entry.2052211534=${ra_tech}&entry.2053574064=${ra_auto}&entry.632598064=${ra_gazd}`" 
-              width="100%" 
-              height="743" 
-              frameborder="0" 
-              marginheight="0" 
-              marginwidth="0"
-            ></iframe>
-          </div>
         </StackComponent>
         <StackComponent v-else class="main" spacing="medium">
           <CardComponent corner="bottom-left">
